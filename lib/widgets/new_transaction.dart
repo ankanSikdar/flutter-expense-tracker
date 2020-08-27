@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+
+class NewTransaction extends StatelessWidget {
+  final Function addTransaction;
+
+  NewTransaction({this.addTransaction});
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 20,
+      ),
+      elevation: 8,
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            TextField(
+              decoration: InputDecoration(labelText: 'Title'),
+              controller: titleController,
+            ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Price',
+                prefixText: '₹ ',
+              ),
+              keyboardType: TextInputType.number,
+              controller: amountController,
+            ),
+            FlatButton(
+              onPressed: () {
+                addTransaction(
+                    title: titleController.text,
+                    amount: double.parse(amountController.text));
+                print(titleController.text);
+                print(amountController.text);
+              },
+              child: Text(
+                'Add Transaction',
+                style: TextStyle(
+                  color: Colors.purple,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
