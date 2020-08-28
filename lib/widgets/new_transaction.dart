@@ -25,8 +25,7 @@ class _NewTransactionState extends State<NewTransaction> {
       title: title,
       amount: amount,
     );
-    titleController.clear();
-    amountController.clear();
+    Navigator.pop(context);
   }
 
   @override
