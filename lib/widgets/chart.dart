@@ -44,6 +44,8 @@ class BarChartSample1State extends State<BarChartSample1> {
     return AspectRatio(
       aspectRatio: 1,
       child: Card(
+        margin: EdgeInsets.all(10),
+        elevation: 7,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         color: Colors.amber,
         child: Stack(
@@ -58,9 +60,10 @@ class BarChartSample1State extends State<BarChartSample1> {
                   Text(
                     'Weekly Expenes',
                     style: TextStyle(
-                        color: Theme.of(context).primaryColorDark,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold),
+                      color: Theme.of(context).primaryColorDark,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(
                     height: 4,
@@ -68,9 +71,10 @@ class BarChartSample1State extends State<BarChartSample1> {
                   Text(
                     'Bar Chart',
                     style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(
                     height: 38,
@@ -173,8 +177,9 @@ class BarChartSample1State extends State<BarChartSample1> {
                   weekDay = 'Sunday';
                   break;
               }
-              return BarTooltipItem(weekDay + '\n' + (rod.y - 1).toString(),
-                  TextStyle(color: Colors.white));
+              return BarTooltipItem(
+                  weekDay + '\n' + '₹ ' + (rod.y - 1).toString(),
+                  TextStyle(color: Colors.white, fontFamily: 'Poppins'));
             }),
         touchCallback: (barTouchResponse) {
           setState(() {

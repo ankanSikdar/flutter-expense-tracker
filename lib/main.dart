@@ -116,19 +116,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              child: BarChartSample1(
-                transactions: _userTransactions,
-              ),
-            ),
-            TransactionList(
+      body: Column(
+        children: [
+          Container(
+            child: BarChartSample1(
               transactions: _userTransactions,
             ),
-          ],
-        ),
+          ),
+          TransactionList(
+            transactions: _userTransactions,
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _startAddNewTransaction(context),
