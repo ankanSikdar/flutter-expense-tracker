@@ -36,6 +36,9 @@ class TransactionList extends StatelessWidget {
                 return Card(
                   margin: EdgeInsets.all(10),
                   elevation: 8,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
                   child: Row(
                     children: [
                       Container(
@@ -49,6 +52,7 @@ class TransactionList extends StatelessWidget {
                             color: Theme.of(context).primaryColor,
                             width: 2,
                           ),
+                          borderRadius: BorderRadius.circular(18),
                         ),
                         child: Text(
                           '₹ ${transactions[index].amount.toStringAsFixed(2)}',
