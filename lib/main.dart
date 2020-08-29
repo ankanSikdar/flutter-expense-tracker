@@ -125,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           TransactionList(
-            transactions: _userTransactions,
+            transactions: _userTransactions.reversed.toList(),
           ),
         ],
       ),
