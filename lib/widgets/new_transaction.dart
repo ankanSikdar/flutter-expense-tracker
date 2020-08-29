@@ -20,13 +20,14 @@ class _NewTransactionState extends State<NewTransaction> {
     String title = titleController.text;
     double amount = double.parse(amountController.text);
 
-    if (title.isEmpty || amount <= 0) {
+    if (title.isEmpty || amount <= 0 || pickedDate == null) {
       return;
     }
 
     widget.addTransaction(
       title: title,
       amount: amount,
+      date: pickedDate,
     );
     Navigator.pop(context);
   }
@@ -75,7 +76,7 @@ class _NewTransactionState extends State<NewTransaction> {
               ),
               keyboardType: TextInputType.number,
               controller: amountController,
-              onSubmitted: (_) => onSubmit(),
+              onSubmitted: (_) => startDatePicker(),
             ),
             Container(
               margin: EdgeInsets.only(
