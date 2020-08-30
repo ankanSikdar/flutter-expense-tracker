@@ -41,60 +41,57 @@ class BarChartSample1State extends State<BarChartSample1> {
   Widget build(BuildContext context) {
     calculateTotal();
     total = spendings.reduce(max);
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Card(
-        margin: EdgeInsets.all(10),
-        elevation: 7,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        color: Colors.amber,
-        child: Stack(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Text(
-                    'Weekly Expenes',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColorDark,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+    return Card(
+      margin: EdgeInsets.all(10),
+      elevation: 7,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      color: Colors.amber,
+      child: Stack(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Text(
+                  'Weekly Expenes',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColorDark,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  'Bar Chart',
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 38,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: BarChart(
+                      mainBarData(),
                     ),
                   ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    'Bar Chart',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 38,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: BarChart(
-                        mainBarData(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
