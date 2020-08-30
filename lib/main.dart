@@ -123,24 +123,29 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Container(
-            child: BarChartSample1(
-              transactions: _userTransactions,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              child: BarChartSample1(
+                transactions: _userTransactions,
+              ),
             ),
-          ),
-          TransactionList(
-            transactions: _userTransactions.reversed.toList(),
-            deleteTransaction: _deleteTransaction,
-          ),
-        ],
+            TransactionList(
+              transactions: _userTransactions.reversed.toList(),
+              deleteTransaction: _deleteTransaction,
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _startAddNewTransaction(context),
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).primaryColor,
+        ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
   }
 }
