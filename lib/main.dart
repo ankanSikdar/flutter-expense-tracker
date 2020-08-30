@@ -107,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (_) => NewTransaction(
         addTransaction: _addNewTransaction,
       ),
+      isScrollControlled: true,
     );
   }
 

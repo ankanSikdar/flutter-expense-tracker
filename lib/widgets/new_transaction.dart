@@ -49,82 +49,92 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 20,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          18,
+    return SingleChildScrollView(
+      child: Card(
+        margin: EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 20,
         ),
-      ),
-      elevation: 8,
-      child: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Title'),
-              controller: titleController,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Price',
-                prefixText: '₹ ',
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            18,
+          ),
+        ),
+        elevation: 8,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 20,
+            left: 20,
+            right: 20,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: 'Title'),
+                controller: titleController,
               ),
-              keyboardType: TextInputType.number,
-              controller: amountController,
-              onSubmitted: (_) => startDatePicker(),
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                top: 10,
-                bottom: 30,
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Price',
+                  prefixText: '₹ ',
+                ),
+                keyboardType: TextInputType.number,
+                controller: amountController,
+                onSubmitted: (_) => startDatePicker(),
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      readOnly: true,
-                      controller: dateController,
-                      decoration: InputDecoration(labelText: 'Date'),
-                      enabled: false,
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: startDatePicker,
-                    child: Text(
-                      'Choose Date',
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 16,
+              Container(
+                margin: EdgeInsets.only(
+                  top: 10,
+                  bottom: 30,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        readOnly: true,
+                        controller: dateController,
+                        decoration: InputDecoration(labelText: 'Date'),
+                        enabled: false,
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-            FlatButton(
-              onPressed: onSubmit,
-              child: Text(
-                'Add Transaction',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
+                    FlatButton(
+                      onPressed: startDatePicker,
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(
+                          color: Colors.purple,
+                          fontSize: 16,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
-              color: Colors.purple,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
+              FlatButton(
+                onPressed: onSubmit,
+                child: Text(
+                  'Add Transaction',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+                color: Colors.purple,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
               ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 10,
-              ),
-            )
-          ],
+              SizedBox(
+                height: 10,
+              )
+            ],
+          ),
         ),
       ),
     );
