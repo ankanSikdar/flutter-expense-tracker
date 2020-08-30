@@ -56,7 +56,7 @@ class BarChartSample1State extends State<BarChartSample1> {
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Text(
-                  'Weekly Expenes',
+                  'Weekly Expenses',
                   style: TextStyle(
                     color: Theme.of(context).primaryColorDark,
                     fontSize: 24,
