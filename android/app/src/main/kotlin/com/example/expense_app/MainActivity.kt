@@ -1,4 +1,4 @@
-package com.example.expense_app
+package com.ankansikdar.expense_app
 
 import io.flutter.embedding.android.FlutterActivity
 
