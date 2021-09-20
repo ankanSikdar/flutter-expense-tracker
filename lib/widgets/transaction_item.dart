@@ -15,42 +15,54 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: Key(transaction.id),
-      background: Container(
-        color: Colors.red,
+    return Card(
+      margin: EdgeInsets.all(10),
+      elevation: 8,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
       ),
-      direction: DismissDirection.endToStart,
-      onDismissed: (direction) {
-        deleteTransaction(transaction.id);
-      },
-      confirmDismiss: (DismissDirection direction) async {
-        return await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("Confirm"),
-              content:
-                  Text("Are you sure you wish to delete this transaction?"),
-              actions: <Widget>[
-                FlatButton(
-                    onPressed: () => Navigator.of(context).pop(true),
-                    child: Text("DELETE")),
-                FlatButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text("CANCEL"),
-                ),
-              ],
-            );
-          },
-        );
-      },
-      child: Card(
-        margin: EdgeInsets.all(10),
-        elevation: 8,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
+      child: Dismissible(
+        key: Key(transaction.id),
+        background: Container(
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(18),
+          ),
+          padding: EdgeInsets.only(right: 20.0),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Icon(
+              Icons.delete,
+              color: Colors.white,
+              size: 30.0,
+            ),
+          ),
         ),
+        direction: DismissDirection.endToStart,
+        onDismissed: (direction) {
+          deleteTransaction(transaction.id);
+        },
+        confirmDismiss: (DismissDirection direction) async {
+          return await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Confirm"),
+                content:
+                    Text("Are you sure you wish to delete this transaction?"),
+                actions: <Widget>[
+                  FlatButton(
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: Text("DELETE")),
+                  FlatButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: Text("CANCEL"),
+                  ),
+                ],
+              );
+            },
+          );
+        },
         child: Row(
           children: [
             Container(
