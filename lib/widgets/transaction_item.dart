@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:expense_app/models/transaction.dart';
 import 'package:intl/intl.dart';
+import 'package:expense_app/extensions/currency_extension.dart';
 
 class TransactionItem extends StatelessWidget {
-  const TransactionItem({
+  TransactionItem({
     Key key,
     @required this.transaction,
     @required this.deleteTransaction,
@@ -66,7 +67,7 @@ class TransactionItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
               ),
               child: Text(
-                '₹ ${transaction.amount.toStringAsFixed(2)}',
+                '${transaction.amount.parseCurrency()}',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
