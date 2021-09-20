@@ -15,19 +15,17 @@ class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
   final dateController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   DateTime pickedDate;
 
   void onSubmit() {
-    String title = titleController.text;
-    double amount = double.parse(amountController.text);
-
-    if (title.isEmpty || amount <= 0 || pickedDate == null) {
+    if (!formKey.currentState.validate()) {
       return;
     }
 
     widget.addTransaction(
-      title: title,
-      amount: amount,
+      title: titleController.text,
+      amount: double.parse(amountController.text),
       date: pickedDate,
     );
     Navigator.pop(context);
@@ -69,72 +67,103 @@ class _NewTransactionState extends State<NewTransaction> {
             right: 20,
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              TextField(
-                decoration: InputDecoration(labelText: 'Title'),
-                controller: titleController,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Price',
-                  prefixText: getCurrencySymbol(),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Title'),
+                  controller: titleController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Title cannot be empty';
+                    }
+                    return null;
+                  },
                 ),
-                keyboardType: TextInputType.number,
-                controller: amountController,
-                onSubmitted: (_) => startDatePicker(),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                  top: 10,
-                  bottom: 30,
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Price',
+                    prefixText: getCurrencySymbol(),
+                  ),
+                  keyboardType: TextInputType.number,
+                  controller: amountController,
+                  onFieldSubmitted: (_) => startDatePicker(),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Amount cannot be empty';
+                    }
+                    final price = double.tryParse(value);
+                    if (price == null) {
+                      return 'Please enter numbers only';
+                    }
+                    if (price <= 0) {
+                      return 'Price must be greater than 0';
+                    }
+                    if (price >= 1000000) {
+                      return 'Price must be less than 100,00,00';
+                    }
+                    return null;
+                  },
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        readOnly: true,
-                        controller: dateController,
-                        decoration: InputDecoration(labelText: 'Date'),
-                        enabled: false,
-                      ),
-                    ),
-                    FlatButton(
-                      onPressed: startDatePicker,
-                      child: Text(
-                        'Choose Date',
-                        style: TextStyle(
-                          color: Colors.purple,
-                          fontSize: 16,
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 10,
+                    bottom: 30,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          readOnly: true,
+                          controller: dateController,
+                          decoration: InputDecoration(labelText: 'Date'),
+                          enableInteractiveSelection: false,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please pick a date';
+                            }
+                            return null;
+                          },
                         ),
                       ),
-                    )
-                  ],
-                ),
-              ),
-              FlatButton(
-                onPressed: onSubmit,
-                child: Text(
-                  'Add Transaction',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
+                      FlatButton(
+                        onPressed: startDatePicker,
+                        child: Text(
+                          'Choose Date',
+                          style: TextStyle(
+                            color: Colors.purple,
+                            fontSize: 16,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                color: Colors.purple,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
+                FlatButton(
+                  onPressed: onSubmit,
+                  child: Text(
+                    'Add Transaction',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
+                  ),
+                  color: Colors.purple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
                 ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              )
-            ],
+                SizedBox(
+                  height: 10,
+                )
+              ],
+            ),
           ),
         ),
       ),
