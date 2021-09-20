@@ -75,24 +75,29 @@ class TransactionItem extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  transaction.title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    transaction.title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 2,
                   ),
-                ),
-                Text(
-                  DateFormat.yMMMd().format(transaction.date),
-                  style: TextStyle(
-                    color: Colors.grey[600],
+                  Text(
+                    DateFormat.yMMMd().format(transaction.date),
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+            SizedBox(width: 10.0),
           ],
         ),
       ),
