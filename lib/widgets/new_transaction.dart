@@ -1,3 +1,4 @@
+import 'package:expense_app/extensions/currency_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -78,7 +79,7 @@ class _NewTransactionState extends State<NewTransaction> {
               TextField(
                 decoration: InputDecoration(
                   labelText: 'Price',
-                  prefixText: '₹ ',
+                  prefixText: getCurrencySymbol(),
                 ),
                 keyboardType: TextInputType.number,
                 controller: amountController,

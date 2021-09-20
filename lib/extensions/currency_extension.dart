@@ -10,3 +10,7 @@ extension CurrencyParsing on double {
     return formatter.format(this);
   }
 }
+
+String getCurrencySymbol() {
+  return formatter.currencySymbol;
+}
