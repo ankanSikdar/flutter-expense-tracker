@@ -4,16 +4,16 @@ import 'dart:math';
 
 import 'package:expense_app/models/transaction.dart';
 
-class BarChartSample1 extends StatefulWidget {
+class WeekBarChart extends StatefulWidget {
   final List<Transaction> transactions;
 
-  BarChartSample1({this.transactions});
+  WeekBarChart({this.transactions});
 
   @override
-  State<StatefulWidget> createState() => BarChartSample1State();
+  State<StatefulWidget> createState() => WeekBarChartState();
 }
 
-class BarChartSample1State extends State<BarChartSample1> {
+class WeekBarChartState extends State<WeekBarChart> {
   final Color barBackgroundColor = Colors.white;
   int touchedIndex;
   double total;

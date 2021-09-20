@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'models/transaction.dart';
 import 'widgets/new_transaction.dart';
 import 'widgets/transaction_list.dart';
-import 'widgets/chart.dart';
+import 'widgets/week_bar_chart.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       appbar.preferredSize.height -
                       MediaQuery.of(context).padding.top) *
                   0.5,
-              child: BarChartSample1(
+              child: WeekBarChart(
                 transactions: _userTransactions,
               ),
             ),
