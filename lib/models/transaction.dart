@@ -6,6 +6,7 @@ class Transaction {
   final double amount;
   final DateTime date;
   final DateTime createdOn;
+  String imagePath;
 
   Transaction({
     @required this.id,
@@ -13,5 +14,6 @@ class Transaction {
     @required this.amount,
     @required this.date,
     @required this.createdOn,
+    this.imagePath,
   });
 }

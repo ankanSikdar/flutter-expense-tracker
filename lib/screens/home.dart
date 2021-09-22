@@ -21,6 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 1150.00,
       date: DateTime.parse("2020-08-17 20:18:04Z"),
       createdOn: DateTime.now(),
+      imagePath: '',
     ),
     Transaction(
       id: Uuid().v4(),
@@ -28,6 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 2799.00,
       date: DateTime.parse("2020-08-18 20:18:04Z"),
       createdOn: DateTime.now(),
+      imagePath: '',
     ),
     Transaction(
       id: Uuid().v4(),
@@ -35,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 2150.00,
       date: DateTime.parse("2020-08-19 20:18:04Z"),
       createdOn: DateTime.now(),
+      imagePath: '',
     ),
     Transaction(
       id: Uuid().v4(),
@@ -42,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 999.99,
       date: DateTime.parse("2020-08-20 20:18:04Z"),
       createdOn: DateTime.now(),
+      imagePath: '',
     ),
     Transaction(
       id: Uuid().v4(),
@@ -49,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 450.00,
       date: DateTime.parse("2020-08-21 20:18:04Z"),
       createdOn: DateTime.now(),
+      imagePath: '',
     ),
     Transaction(
       id: Uuid().v4(),
@@ -56,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 759.99,
       date: DateTime.parse("2020-08-22 20:18:04Z"),
       createdOn: DateTime.now(),
+      imagePath: '',
     ),
     Transaction(
       id: Uuid().v4(),
@@ -63,16 +69,19 @@ class _MyHomePageState extends State<MyHomePage> {
       amount: 959.99,
       date: DateTime.parse("2020-08-23 20:18:04Z"),
       createdOn: DateTime.now(),
+      imagePath: '',
     ),
   ];
 
-  void _addNewTransaction({String title, double amount, DateTime date}) {
+  void _addNewTransaction(
+      {String title, double amount, DateTime date, String imagePath}) {
     final newTransaction = Transaction(
       id: Uuid().v4(),
       title: title,
       amount: amount,
       date: date,
       createdOn: DateTime.now(),
+      imagePath: imagePath,
     );
 
     setState(() {

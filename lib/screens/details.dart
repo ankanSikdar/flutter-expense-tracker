@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:expense_app/models/transaction.dart';
 import 'package:expense_app/extensions/currency_extension.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +44,16 @@ class DetailsPage extends StatelessWidget {
               ),
               Text(
                   'Created At: ${DateFormat.yMMMEd().format(transaction.createdOn)} ${DateFormat.jm().format(transaction.createdOn)}'),
+              SizedBox(height: 16.0),
+              if (transaction.imagePath.isNotEmpty)
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  child: Image.file(
+                    File(transaction.imagePath),
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
             ],
           ),
         ),

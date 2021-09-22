@@ -4,6 +4,8 @@ import 'package:expense_app/extensions/currency_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:likk_picker/likk_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:uuid/uuid.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addTransaction;
@@ -21,28 +23,32 @@ class _NewTransactionState extends State<NewTransaction> {
   final formKey = GlobalKey<FormState>();
   DateTime pickedDate;
   File imageFile;
-
+  Directory appLibraryDirectory;
   GalleryController controller;
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      controller = GalleryController(
-        gallerySetting: GallerySetting(
-          enableCamera: true,
-          maximum: 1,
-          requestType: RequestType.image,
-          onItemClick: (entity, list) async {
-            if (list.isNotEmpty) {
-              final file = await list[0].entity.file;
-              updateImage(file);
-              Navigator.pop(context);
-            }
-          },
-        ),
-      );
-    });
+    updateDirectory();
+    controller = GalleryController(
+      gallerySetting: GallerySetting(
+        enableCamera: true,
+        maximum: 1,
+        requestType: RequestType.image,
+        onItemClick: (entity, list) async {
+          if (list.isNotEmpty) {
+            final file = await list[0].entity.file;
+            updateImage(file);
+            Navigator.pop(context);
+          }
+        },
+      ),
+    );
+  }
+
+  Future<void> updateDirectory() async {
+    appLibraryDirectory = await getApplicationDocumentsDirectory();
+    appLibraryDirectory = await appLibraryDirectory.create();
   }
 
   void updateImage(File image) {
@@ -56,15 +62,22 @@ class _NewTransactionState extends State<NewTransaction> {
     }
   }
 
-  void onSubmit() {
+  void onSubmit() async {
     if (!formKey.currentState.validate()) {
       return;
+    }
+    File writtenFile;
+    if (imageFile != null) {
+      final imageFilePath = '${appLibraryDirectory.path}/${Uuid().v4()}.png';
+      final emptyFile = await File(imageFilePath).create();
+      writtenFile = await emptyFile.writeAsBytes(imageFile.readAsBytesSync());
     }
 
     widget.addTransaction(
       title: titleController.text,
       amount: double.parse(amountController.text),
       date: pickedDate,
+      imagePath: imageFile == null ? '' : writtenFile.path,
     );
     Navigator.pop(context);
   }
