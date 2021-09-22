@@ -26,6 +26,7 @@ dependencies:
   flutter:
     sdk: flutter
   intl: ^0.16.1
+  likk_picker: ^1.0.7+1
   uuid: ^3.0.4
 
 dev_dependencies:
