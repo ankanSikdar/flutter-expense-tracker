@@ -4,6 +4,7 @@ import 'package:expense_app/widgets/transaction_list.dart';
 import 'package:expense_app/widgets/week_bar_chart.dart';
 import 'package:expense_app/widgets/week_pie_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -11,51 +12,53 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final uuid = Uuid();
+
   final List<Transaction> _userTransactions = [
     Transaction(
-      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
+      id: Uuid().v4(),
       title: 'New Shoes',
       amount: 1150.00,
       date: DateTime.parse("2020-08-17 20:18:04Z"),
       createdOn: DateTime.now(),
     ),
     Transaction(
-      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
+      id: Uuid().v4(),
       title: 'New Pants',
       amount: 2799.00,
       date: DateTime.parse("2020-08-18 20:18:04Z"),
       createdOn: DateTime.now(),
     ),
     Transaction(
-      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
+      id: Uuid().v4(),
       title: 'New Watch',
       amount: 2150.00,
       date: DateTime.parse("2020-08-19 20:18:04Z"),
       createdOn: DateTime.now(),
     ),
     Transaction(
-      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
+      id: Uuid().v4(),
       title: 'New Shirt',
       amount: 999.99,
       date: DateTime.parse("2020-08-20 20:18:04Z"),
       createdOn: DateTime.now(),
     ),
     Transaction(
-      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
+      id: Uuid().v4(),
       title: 'New Clock',
       amount: 450.00,
       date: DateTime.parse("2020-08-21 20:18:04Z"),
       createdOn: DateTime.now(),
     ),
     Transaction(
-      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
+      id: Uuid().v4(),
       title: 'New Pen',
       amount: 759.99,
       date: DateTime.parse("2020-08-22 20:18:04Z"),
       createdOn: DateTime.now(),
     ),
     Transaction(
-      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
+      id: Uuid().v4(),
       title: 'New Headphone',
       amount: 959.99,
       date: DateTime.parse("2020-08-23 20:18:04Z"),
@@ -65,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _addNewTransaction({String title, double amount, DateTime date}) {
     final newTransaction = Transaction(
-      id: DateTime.now().toString(),
+      id: Uuid().v4(),
       title: title,
       amount: amount,
       date: date,

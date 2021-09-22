@@ -41,7 +41,7 @@ class DetailsPage extends StatelessWidget {
                 'Date: ${DateFormat.yMMMMEEEEd().format(transaction.date)}',
               ),
               Text(
-                  'Created At: ${DateFormat.yMMMEd().format(transaction.createdOn)} ${DateFormat.jm().format(transaction.createdOn)}')
+                  'Created At: ${DateFormat.yMMMEd().format(transaction.createdOn)} ${DateFormat.jm().format(transaction.createdOn)}'),
             ],
           ),
         ),
