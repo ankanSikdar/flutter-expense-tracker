@@ -1,6 +1,7 @@
 import 'package:expense_app/models/transaction.dart';
 import 'package:expense_app/widgets/new_transaction.dart';
 import 'package:expense_app/widgets/transaction_list.dart';
+import 'package:expense_app/widgets/week_bar_chart.dart';
 import 'package:expense_app/widgets/week_pie_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -84,6 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  bool showBarChart = true;
+
   @override
   Widget build(BuildContext context) {
     AppBar appbar = AppBar(
@@ -106,8 +109,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       appbar.preferredSize.height -
                       MediaQuery.of(context).padding.top) *
                   0.5,
-              child: WeekPieChart(
-                transactions: _userTransactions,
+              child: GestureDetector(
+                onHorizontalDragEnd: (details) {
+                  int sensitivity = 8;
+                  if (details.primaryVelocity > sensitivity ||
+                      details.primaryVelocity < -sensitivity) {
+                    setState(() {
+                      showBarChart = !showBarChart;
+                    });
+                  }
+                },
+                child: showBarChart
+                    ? WeekBarChart(transactions: _userTransactions)
+                    : WeekPieChart(
+                        transactions: _userTransactions,
+                      ),
               ),
             ),
             Container(
