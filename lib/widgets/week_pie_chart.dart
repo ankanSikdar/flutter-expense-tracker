@@ -70,43 +70,43 @@ class _WeekPieChartState extends State<WeekPieChart> {
                       sections: [
                         PieChartSectionData(
                           showTitle: false,
-                          color: Colors.black,
+                          color: Colors.redAccent,
                           value: spendings[0],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
-                          color: Colors.redAccent,
+                          color: Colors.deepPurple,
                           value: spendings[1],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
-                          color: Colors.deepPurple,
+                          color: Colors.grey,
                           value: spendings[2],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
-                          color: Colors.grey,
+                          color: Colors.green,
                           value: spendings[3],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
-                          color: Colors.green,
+                          color: Colors.brown,
                           value: spendings[4],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
-                          color: Colors.brown,
+                          color: Colors.blue,
                           value: spendings[5],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
-                          color: Colors.blue,
+                          color: Colors.black,
                           value: spendings[6],
                           radius: 75.0,
                         ),
@@ -119,13 +119,6 @@ class _WeekPieChartState extends State<WeekPieChart> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.max,
                   children: const <Widget>[
-                    Indicator(
-                      color: Colors.black,
-                      text: 'Sun',
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
                     Indicator(
                       color: Colors.redAccent,
                       text: 'Mon',
@@ -164,6 +157,13 @@ class _WeekPieChartState extends State<WeekPieChart> {
                     Indicator(
                       color: Colors.blue,
                       text: 'Sat',
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Indicator(
+                      color: Colors.black,
+                      text: 'Sun',
                     ),
                   ],
                 ),
