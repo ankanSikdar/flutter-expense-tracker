@@ -1,3 +1,4 @@
+import 'package:expense_app/screens/details.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_app/models/transaction.dart';
 import 'package:intl/intl.dart';
@@ -63,54 +64,65 @@ class TransactionItem extends StatelessWidget {
             },
           );
         },
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 20,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(15.0),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailsPage(transaction: transaction),
               ),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).primaryColor,
-                  width: 2,
+            );
+          },
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
                 ),
-                borderRadius: BorderRadius.circular(18),
-              ),
-              child: Text(
-                '${transaction.amount.parseCurrency()}',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).primaryColor,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Text(
+                  '${transaction.amount.parseCurrency()}',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    transaction.title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      overflow: TextOverflow.ellipsis,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      transaction.title,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      maxLines: 2,
                     ),
-                    maxLines: 2,
-                  ),
-                  Text(
-                    DateFormat.yMMMd().format(transaction.date),
-                    style: TextStyle(
-                      color: Colors.grey[600],
+                    Text(
+                      DateFormat.yMMMd().format(transaction.date),
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(width: 10.0),
-          ],
+              SizedBox(width: 10.0),
+            ],
+          ),
         ),
       ),
     );

@@ -13,43 +13,43 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
     Transaction(
-      id: 't1',
+      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
       title: 'New Shoes',
       amount: 1150.00,
       date: DateTime.parse("2020-08-17 20:18:04Z"),
     ),
     Transaction(
-      id: 't2',
+      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
       title: 'New Pants',
       amount: 2799.00,
       date: DateTime.parse("2020-08-18 20:18:04Z"),
     ),
     Transaction(
-      id: 't3',
+      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
       title: 'New Watch',
       amount: 2150.00,
       date: DateTime.parse("2020-08-19 20:18:04Z"),
     ),
     Transaction(
-      id: 't4',
+      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
       title: 'New Shirt',
       amount: 999.99,
       date: DateTime.parse("2020-08-20 20:18:04Z"),
     ),
     Transaction(
-      id: 't5',
+      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
       title: 'New Clock',
       amount: 450.00,
       date: DateTime.parse("2020-08-21 20:18:04Z"),
     ),
     Transaction(
-      id: 't6',
+      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
       title: 'New Pen',
       amount: 759.99,
       date: DateTime.parse("2020-08-22 20:18:04Z"),
     ),
     Transaction(
-      id: 't7',
+      id: '${DateTime.parse("2020-08-17 20:18:04Z").toIso8601String()}',
       title: 'New Headphone',
       amount: 959.99,
       date: DateTime.parse("2020-08-23 20:18:04Z"),
