@@ -31,11 +31,14 @@ class TransactionList extends StatelessWidget {
           )
         : ListView.builder(
             itemBuilder: (context, index) {
+              if (index == transactions.length) {
+                return SizedBox(height: 75.0);
+              }
               return TransactionItem(
                   transaction: transactions[index],
                   deleteTransaction: deleteTransaction);
             },
-            itemCount: transactions.length,
+            itemCount: transactions.length + 1,
           );
   }
 }
