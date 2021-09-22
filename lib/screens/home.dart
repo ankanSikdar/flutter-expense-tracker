@@ -143,8 +143,9 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () => _startAddNewTransaction(context),
         child: Icon(
           Icons.add,
-          color: Theme.of(context).primaryColor,
         ),
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
     );
