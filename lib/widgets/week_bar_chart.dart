@@ -102,23 +102,19 @@ class WeekBarChartState extends State<WeekBarChart> {
     bool isTouched = false,
     Color barColor = Colors.purple,
     double width = 22,
-    List<int> showTooltips = const [],
   }) {
     return BarChartGroupData(
       x: x,
       barRods: [
         BarChartRodData(
           y: isTouched ? y + 1 : y,
-          color: isTouched ? Theme.of(context).primaryColorDark : barColor,
+          colors: [isTouched ? Theme.of(context).primaryColorDark : barColor],
           width: width,
           backDrawRodData: BackgroundBarChartRodData(
-            show: true,
-            y: total, // Length of all Bars
-            color: barBackgroundColor,
-          ),
+              show: true, y: total, // Length of all Bars
+              colors: [barBackgroundColor]),
         ),
       ],
-      showingTooltipIndicators: showTooltips,
     );
   }
 
@@ -178,11 +174,11 @@ class WeekBarChartState extends State<WeekBarChart> {
                   weekDay + '\n' + '₹ ' + (rod.y - 1).toString(),
                   TextStyle(color: Colors.white, fontFamily: 'Poppins'));
             }),
-        touchCallback: (barTouchResponse) {
+        touchCallback: (touchEvent, barTouchResponse) {
           setState(() {
-            if (barTouchResponse.spot != null &&
-                barTouchResponse.touchInput is! FlPanEnd &&
-                barTouchResponse.touchInput is! FlLongPressEnd) {
+            if (barTouchResponse != null &&
+                barTouchResponse.spot != null &&
+                touchEvent.isInterestedForInteractions) {
               touchedIndex = barTouchResponse.spot.touchedBarGroupIndex;
             } else {
               touchedIndex = -1;
@@ -192,9 +188,10 @@ class WeekBarChartState extends State<WeekBarChart> {
       ),
       titlesData: FlTitlesData(
         show: true,
+        topTitles: SideTitles(showTitles: false),
         bottomTitles: SideTitles(
           showTitles: true,
-          textStyle: TextStyle(
+          getTextStyles: (context, value) => TextStyle(
             color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
             fontSize: 14,

@@ -21,10 +21,13 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  bloc: ^7.2.0
   cupertino_icons: ^0.1.3
-  fl_chart: ^0.11.0
+  equatable: ^2.0.3
+  fl_chart: ^0.40.0
   flutter:
     sdk: flutter
+  flutter_bloc: ^7.3.0
   intl: ^0.16.1
   likk_picker: ^1.0.7+1
   path_provider: ^2.0.5
