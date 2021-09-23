@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-class Transaction {
+class Transaction extends Equatable {
   final String id;
   final String title;
   final double amount;
@@ -16,4 +17,7 @@ class Transaction {
     @required this.createdOn,
     @required this.imagePath,
   });
+
+  @override
+  List<Object> get props => [id, title, amount, date, createdOn, imagePath];
 }

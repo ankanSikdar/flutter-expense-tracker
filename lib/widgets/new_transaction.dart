@@ -1,17 +1,16 @@
 import 'dart:io';
 
+import 'package:expense_app/blocs/transactions/transactions_bloc.dart';
 import 'package:expense_app/extensions/currency_extension.dart';
+import 'package:expense_app/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:likk_picker/likk_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewTransaction extends StatefulWidget {
-  final Function addTransaction;
-
-  NewTransaction({this.addTransaction});
-
   @override
   _NewTransactionState createState() => _NewTransactionState();
 }
@@ -72,12 +71,18 @@ class _NewTransactionState extends State<NewTransaction> {
       final emptyFile = await File(imageFilePath).create();
       writtenFile = await emptyFile.writeAsBytes(imageFile.readAsBytesSync());
     }
-
-    widget.addTransaction(
-      title: titleController.text,
-      amount: double.parse(amountController.text),
-      date: pickedDate,
-      imagePath: imageFile == null ? '' : writtenFile.path,
+    final tBloc = context.read<TransactionsBloc>();
+    tBloc.add(
+      AddTransaction(
+        transaction: Transaction(
+          id: Uuid().v4(),
+          title: titleController.text,
+          amount: double.parse(amountController.text),
+          date: pickedDate,
+          imagePath: imageFile == null ? '' : writtenFile.path,
+          createdOn: DateTime.now(),
+        ),
+      ),
     );
     Navigator.pop(context);
   }
