@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:expense_app/models/transaction.dart';
+import 'package:expense_app/models/models.dart';
 
 class WeekBarChart extends StatefulWidget {
   final List<Transaction> transactions;

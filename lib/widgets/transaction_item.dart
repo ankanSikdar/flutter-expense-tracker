@@ -1,6 +1,6 @@
-import 'package:expense_app/screens/details.dart';
+import 'package:expense_app/models/models.dart';
+import 'package:expense_app/screens/screens.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_app/models/transaction.dart';
 import 'package:intl/intl.dart';
 import 'package:expense_app/extensions/currency_extension.dart';
 

@@ -1,8 +1,5 @@
-import 'package:expense_app/blocs/transactions/transactions_bloc.dart';
-import 'package:expense_app/widgets/new_transaction.dart';
-import 'package:expense_app/widgets/transaction_list.dart';
-import 'package:expense_app/widgets/week_bar_chart.dart';
-import 'package:expense_app/widgets/week_pie_chart.dart';
+import 'package:expense_app/blocs/app_blocs.dart';
+import 'package:expense_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,7 +1,6 @@
-import 'package:expense_app/blocs/app_bloc_observer.dart';
-import 'package:expense_app/blocs/transactions/transactions_bloc.dart';
-import 'package:expense_app/repositories/transactions_repository.dart';
-import 'package:expense_app/screens/home.dart';
+import 'package:expense_app/blocs/app_blocs.dart';
+import 'package:expense_app/repositories/repositories.dart';
+import 'package:expense_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

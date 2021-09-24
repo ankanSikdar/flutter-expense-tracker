@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:expense_app/models/transaction.dart';
-import 'package:expense_app/repositories/transactions_repository.dart';
+import 'package:expense_app/models/models.dart';
+import 'package:expense_app/repositories/repositories.dart';
 import 'package:meta/meta.dart';
 
 part 'transactions_event.dart';
