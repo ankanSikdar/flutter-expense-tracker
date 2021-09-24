@@ -4,24 +4,24 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart' as sqf;
 
 class TransactionsRepository {
-  static const tableName = 'transactions';
-  String dbPath;
-  sqf.Database db;
+  static const _tableName = 'transactions';
+  String _dbPath;
+  sqf.Database _db;
 
   Future<List<Transaction>> loadTransactions() async {
-    dbPath = join(await sqf.getDatabasesPath(), 'transactions_data.db');
+    _dbPath = join(await sqf.getDatabasesPath(), 'transactions_data.db');
     try {
-      final dbAlreadyExists = await sqf.databaseExists(dbPath);
+      final dbAlreadyExists = await sqf.databaseExists(_dbPath);
       if (dbAlreadyExists) {
-        db = await sqf.openDatabase(dbPath, version: 1);
+        _db = await sqf.openDatabase(_dbPath, version: 1);
         return await getAllTransactions();
       } else {
-        db = await sqf.openDatabase(
-          dbPath,
+        _db = await sqf.openDatabase(
+          _dbPath,
           version: 1,
           onCreate: (db, version) {
             return db.execute(
-                'CREATE TABLE $tableName(id TEXT PRIMARY KEY, title TEXT, amount TEXT, date INTEGER, createdOn INTEGER, imagePath TEXT)');
+                'CREATE TABLE $_tableName(id TEXT PRIMARY KEY, title TEXT, amount TEXT, date INTEGER, createdOn INTEGER, imagePath TEXT)');
           },
         );
         return [];
@@ -33,7 +33,7 @@ class TransactionsRepository {
 
   Future<List<Transaction>> getAllTransactions() async {
     try {
-      final List<Map> tList = await db.query(tableName, orderBy: 'date');
+      final List<Map> tList = await _db.query(_tableName, orderBy: 'date');
       final List<Transaction> transactions =
           tList.map((tMap) => Transaction.fromMap(tMap)).toList();
       return transactions;
@@ -45,7 +45,7 @@ class TransactionsRepository {
   Future<List<Transaction>> addTransaction(
       {@required List<Transaction> list, @required Transaction addT}) async {
     try {
-      await db.insert(tableName, addT.toMap(),
+      await _db.insert(_tableName, addT.toMap(),
           conflictAlgorithm: sqf.ConflictAlgorithm.replace);
       return await getAllTransactions();
     } catch (e) {
@@ -56,7 +56,7 @@ class TransactionsRepository {
   Future<List<Transaction>> removeTransaction(
       {@required List<Transaction> list, @required String remTID}) async {
     try {
-      await db.delete(tableName, where: 'id = ?', whereArgs: [remTID]);
+      await _db.delete(_tableName, where: 'id = ?', whereArgs: [remTID]);
       return await getAllTransactions();
     } catch (e) {
       throw Exception('Unable to get delete transaction.');
