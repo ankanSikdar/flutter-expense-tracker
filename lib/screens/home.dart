@@ -17,16 +17,16 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  bool showBarChart = true;
+  bool _showBarChart = true;
 
   @override
   Widget build(BuildContext context) {
-    AppBar appbar = AppBar(
+    AppBar _appbar = AppBar(
       title: Text('Expense Tracker'),
     );
 
     return Scaffold(
-      appBar: appbar,
+      appBar: _appbar,
       body: SingleChildScrollView(
         child: BlocConsumer<TransactionsBloc, TransactionsState>(
           listener: (context, state) {
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Container(
                         height: (MediaQuery.of(context).size.height -
-                                appbar.preferredSize.height -
+                                _appbar.preferredSize.height -
                                 MediaQuery.of(context).padding.top) *
                             0.5,
                         child: GestureDetector(
@@ -81,11 +81,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             if (details.primaryVelocity > sensitivity ||
                                 details.primaryVelocity < -sensitivity) {
                               setState(() {
-                                showBarChart = !showBarChart;
+                                _showBarChart = !_showBarChart;
                               });
                             }
                           },
-                          child: showBarChart
+                          child: _showBarChart
                               ? WeekBarChart(
                                   transactions: state.transactionsList)
                               : WeekPieChart(
@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Container(
                         height: (MediaQuery.of(context).size.height -
-                                appbar.preferredSize.height -
+                                _appbar.preferredSize.height -
                                 MediaQuery.of(context).padding.top) *
                             0.5,
                         child: TransactionList(

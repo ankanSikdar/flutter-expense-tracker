@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DetailsPage extends StatelessWidget {
-  final Transaction transaction;
-  const DetailsPage({Key key, @required this.transaction}) : super(key: key);
+  final Transaction _transaction;
+  const DetailsPage({Key key, Transaction transaction})
+      : _transaction = transaction,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class DetailsPage extends StatelessWidget {
                 width: double.infinity,
               ),
               Text(
-                transaction.title,
+                _transaction.title,
                 style: TextStyle(
                   fontSize: 28.0,
                   color: Theme.of(context).primaryColor,
@@ -34,22 +36,22 @@ class DetailsPage extends StatelessWidget {
               ),
               SizedBox(height: 32.0),
               Text(
-                '${getCurrencySymbol()} ${transaction.amount.toStringAsFixed(2)}',
+                '${getCurrencySymbol()} ${_transaction.amount.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 22.0),
               ),
               SizedBox(height: 16.0),
               Text(
-                'Date: ${DateFormat.yMMMMEEEEd().format(transaction.date)}',
+                'Date: ${DateFormat.yMMMMEEEEd().format(_transaction.date)}',
               ),
               Text(
-                  'Created At: ${DateFormat.yMMMEd().format(transaction.createdOn)} ${DateFormat.jm().format(transaction.createdOn)}'),
+                  'Created At: ${DateFormat.yMMMEd().format(_transaction.createdOn)} ${DateFormat.jm().format(_transaction.createdOn)}'),
               SizedBox(height: 16.0),
-              if (transaction.imagePath.isNotEmpty)
+              if (_transaction.imagePath.isNotEmpty)
                 Container(
                   height: 200,
                   width: double.infinity,
                   child: Image.file(
-                    File(transaction.imagePath),
+                    File(_transaction.imagePath),
                     fit: BoxFit.fitWidth,
                   ),
                 ),
