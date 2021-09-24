@@ -31,7 +31,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: appbar,
       body: SingleChildScrollView(
-        child: BlocBuilder<TransactionsBloc, TransactionsState>(
+        child: BlocConsumer<TransactionsBloc, TransactionsState>(
+          listener: (context, state) {
+            if (state.status == TStatus.error) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(
+                  state.error,
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: Theme.of(context).errorColor,
+              ));
+            }
+          },
           builder: (context, state) {
             if (state.status == TStatus.initial ||
                 state.status == TStatus.loading) {
@@ -95,8 +106,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               state.transactionsList.reversed.toList(),
                           deleteTransaction: (String transactionID) {
                             context.read<TransactionsBloc>().add(
-                                RemoveTransaction(
-                                    transactionID: transactionID));
+                                  RemoveTransaction(
+                                      transactionID: transactionID),
+                                );
                           },
                         ),
                       ),

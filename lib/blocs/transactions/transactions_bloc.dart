@@ -21,22 +21,34 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
       }
       if (event is GetTransactions) {
         emit(state.copyWith(status: TStatus.loading));
-        final transactions = await transactionsRepository.loadTransactions();
-        add(UpdateTransactions(transactions: transactions));
+        try {
+          final transactions = await transactionsRepository.loadTransactions();
+          add(UpdateTransactions(transactions: transactions));
+        } catch (e) {
+          emit(state.copyWith(status: TStatus.error, error: e));
+        }
       }
 
       if (event is AddTransaction) {
         emit(state.copyWith(status: TStatus.loading));
-        final transactions = await transactionsRepository.addTransaction(
-            list: state.transactionsList, addT: event.transaction);
-        add(UpdateTransactions(transactions: transactions));
+        try {
+          final transactions = await transactionsRepository.addTransaction(
+              list: state.transactionsList, addT: event.transaction);
+          add(UpdateTransactions(transactions: transactions));
+        } catch (e) {
+          emit(state.copyWith(status: TStatus.error, error: e));
+        }
       }
 
       if (event is RemoveTransaction) {
         emit(state.copyWith(status: TStatus.loading));
-        final transactions = await transactionsRepository.removeTransaction(
-            list: state.transactionsList, remTID: event.transactionID);
-        add(UpdateTransactions(transactions: transactions));
+        try {
+          final transactions = await transactionsRepository.removeTransaction(
+              list: state.transactionsList, remTID: event.transactionID);
+          add(UpdateTransactions(transactions: transactions));
+        } catch (e) {
+          emit(state.copyWith(status: TStatus.error, error: e));
+        }
       }
     });
   }
