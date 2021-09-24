@@ -39,46 +39,69 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: CircularProgressIndicator(),
               );
             }
-            return Column(
-              children: [
-                Container(
-                  height: (MediaQuery.of(context).size.height -
-                          appbar.preferredSize.height -
-                          MediaQuery.of(context).padding.top) *
-                      0.5,
-                  child: GestureDetector(
-                    onHorizontalDragEnd: (details) {
-                      int sensitivity = 8;
-                      if (details.primaryVelocity > sensitivity ||
-                          details.primaryVelocity < -sensitivity) {
-                        setState(() {
-                          showBarChart = !showBarChart;
-                        });
-                      }
-                    },
-                    child: showBarChart
-                        ? WeekBarChart(transactions: state.transactionsList)
-                        : WeekPieChart(
-                            transactions: state.transactionsList,
-                          ),
-                  ),
-                ),
-                Container(
-                  height: (MediaQuery.of(context).size.height -
-                          appbar.preferredSize.height -
-                          MediaQuery.of(context).padding.top) *
-                      0.5,
-                  child: TransactionList(
-                    transactions: state.transactionsList.reversed.toList(),
-                    deleteTransaction: (String transactionID) {
-                      context
-                          .read<TransactionsBloc>()
-                          .add(RemoveTransaction(transactionID: transactionID));
-                    },
-                  ),
-                ),
-              ],
-            );
+            return state.transactionsList.isEmpty
+                ? Column(
+                    children: [
+                      Text(
+                        'No Transactions Added Yet!',
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        height: 400.0,
+                        width: double.infinity,
+                        child: Image.asset(
+                          'assets/images/waiting.png',
+                        ),
+                      ),
+                    ],
+                  )
+                : Column(
+                    children: [
+                      Container(
+                        height: (MediaQuery.of(context).size.height -
+                                appbar.preferredSize.height -
+                                MediaQuery.of(context).padding.top) *
+                            0.5,
+                        child: GestureDetector(
+                          onHorizontalDragEnd: (details) {
+                            int sensitivity = 8;
+                            if (details.primaryVelocity > sensitivity ||
+                                details.primaryVelocity < -sensitivity) {
+                              setState(() {
+                                showBarChart = !showBarChart;
+                              });
+                            }
+                          },
+                          child: showBarChart
+                              ? WeekBarChart(
+                                  transactions: state.transactionsList)
+                              : WeekPieChart(
+                                  transactions: state.transactionsList,
+                                ),
+                        ),
+                      ),
+                      Container(
+                        height: (MediaQuery.of(context).size.height -
+                                appbar.preferredSize.height -
+                                MediaQuery.of(context).padding.top) *
+                            0.5,
+                        child: TransactionList(
+                          transactions:
+                              state.transactionsList.reversed.toList(),
+                          deleteTransaction: (String transactionID) {
+                            context.read<TransactionsBloc>().add(
+                                RemoveTransaction(
+                                    transactionID: transactionID));
+                          },
+                        ),
+                      ),
+                    ],
+                  );
           },
         ),
       ),
