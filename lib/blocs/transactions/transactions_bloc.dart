@@ -8,10 +8,10 @@ part 'transactions_event.dart';
 part 'transactions_state.dart';
 
 class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
-  final TransactionsRepository transactionsRepository;
+  final TransactionsRepository _transactionsRepository;
 
   TransactionsBloc({@required TransactionsRepository transactionsRepository})
-      : this.transactionsRepository = transactionsRepository,
+      : this._transactionsRepository = transactionsRepository,
         super(TransactionsState.initial()) {
     on<TransactionsEvent>(
         (TransactionsEvent event, Emitter<TransactionsState> emit) async {
@@ -22,7 +22,7 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
       if (event is GetTransactions) {
         emit(state.copyWith(status: TStatus.loading));
         try {
-          final transactions = await transactionsRepository.loadTransactions();
+          final transactions = await _transactionsRepository.loadTransactions();
           add(UpdateTransactions(transactions: transactions));
         } catch (e) {
           emit(state.copyWith(status: TStatus.error, error: e));
@@ -32,7 +32,7 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
       if (event is AddTransaction) {
         emit(state.copyWith(status: TStatus.loading));
         try {
-          final transactions = await transactionsRepository.addTransaction(
+          final transactions = await _transactionsRepository.addTransaction(
               list: state.transactionsList, addT: event.transaction);
           add(UpdateTransactions(transactions: transactions));
         } catch (e) {
@@ -43,7 +43,7 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
       if (event is RemoveTransaction) {
         emit(state.copyWith(status: TStatus.loading));
         try {
-          final transactions = await transactionsRepository.removeTransaction(
+          final transactions = await _transactionsRepository.removeTransaction(
               list: state.transactionsList, remTID: event.transactionID);
           add(UpdateTransactions(transactions: transactions));
         } catch (e) {
