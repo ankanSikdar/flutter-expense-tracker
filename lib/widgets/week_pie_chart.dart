@@ -3,29 +3,31 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class WeekPieChart extends StatefulWidget {
-  final List<Transaction> transactions;
-  const WeekPieChart({Key key, @required this.transactions}) : super(key: key);
+  final List<Transaction> _transactions;
+  const WeekPieChart({Key key, List<Transaction> transactions})
+      : _transactions = transactions,
+        super(key: key);
 
   @override
   _WeekPieChartState createState() => _WeekPieChartState();
 }
 
 class _WeekPieChartState extends State<WeekPieChart> {
-  List<double> spendings = List.generate(7, (index) => 0);
+  List<double> _spendings = List.generate(7, (index) => 0);
 
-  void generateWeeklyReport() {
-    if (spendings.isNotEmpty) {
-      spendings.clear();
-      spendings = List.generate(7, (index) => 0);
+  void _generateWeeklyReport() {
+    if (_spendings.isNotEmpty) {
+      _spendings.clear();
+      _spendings = List.generate(7, (index) => 0);
     }
-    for (Transaction transaction in widget.transactions) {
-      spendings[transaction.date.weekday - 1] += transaction.amount;
+    for (Transaction transaction in widget._transactions) {
+      _spendings[transaction.date.weekday - 1] += transaction.amount;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    generateWeeklyReport();
+    _generateWeeklyReport();
     return Card(
       margin: EdgeInsets.all(10),
       elevation: 7,
@@ -71,43 +73,43 @@ class _WeekPieChartState extends State<WeekPieChart> {
                         PieChartSectionData(
                           showTitle: false,
                           color: Colors.redAccent,
-                          value: spendings[0],
+                          value: _spendings[0],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           color: Colors.deepPurple,
-                          value: spendings[1],
+                          value: _spendings[1],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           color: Colors.grey,
-                          value: spendings[2],
+                          value: _spendings[2],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           color: Colors.green,
-                          value: spendings[3],
+                          value: _spendings[3],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           color: Colors.brown,
-                          value: spendings[4],
+                          value: _spendings[4],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           color: Colors.blue,
-                          value: spendings[5],
+                          value: _spendings[5],
                           radius: 75.0,
                         ),
                         PieChartSectionData(
                           showTitle: false,
                           color: Colors.black,
-                          value: spendings[6],
+                          value: _spendings[6],
                           radius: 75.0,
                         ),
                       ],
@@ -177,38 +179,42 @@ class _WeekPieChartState extends State<WeekPieChart> {
 }
 
 class Indicator extends StatelessWidget {
-  final Color color;
-  final String text;
-  final double size;
-  final Color textColor;
+  final Color _color;
+  final String _text;
+  final double _size;
+  final Color _textColor;
 
   const Indicator({
     Key key,
-    @required this.color,
-    @required this.text,
-    this.size = 16,
-    this.textColor = const Color(0xff505050),
-  }) : super(key: key);
+    @required Color color,
+    @required String text,
+    double size = 16,
+    Color textColor = const Color(0xff505050),
+  })  : _color = color,
+        _text = text,
+        _size = size,
+        _textColor = textColor,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
         Container(
-          width: size,
-          height: size,
+          width: _size,
+          height: _size,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: color,
+            color: _color,
           ),
         ),
         const SizedBox(
           width: 4,
         ),
         Text(
-          text,
+          _text,
           style: TextStyle(
-              fontSize: 12, fontWeight: FontWeight.bold, color: textColor),
+              fontSize: 12, fontWeight: FontWeight.bold, color: _textColor),
         )
       ],
     );

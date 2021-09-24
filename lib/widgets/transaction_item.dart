@@ -7,12 +7,14 @@ import 'package:expense_app/extensions/currency_extension.dart';
 class TransactionItem extends StatelessWidget {
   TransactionItem({
     Key key,
-    @required this.transaction,
-    @required this.deleteTransaction,
-  }) : super(key: key);
+    @required Transaction transaction,
+    @required Function deleteTransaction,
+  })  : _transaction = transaction,
+        _deleteTransaction = deleteTransaction,
+        super(key: key);
 
-  final Transaction transaction;
-  final Function deleteTransaction;
+  final Transaction _transaction;
+  final Function _deleteTransaction;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class TransactionItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
       ),
       child: Dismissible(
-        key: Key(transaction.id),
+        key: Key(_transaction.id),
         background: Container(
           decoration: BoxDecoration(
             color: Colors.red,
@@ -41,7 +43,7 @@ class TransactionItem extends StatelessWidget {
         ),
         direction: DismissDirection.endToStart,
         onDismissed: (direction) {
-          deleteTransaction(transaction.id);
+          _deleteTransaction(_transaction.id);
         },
         confirmDismiss: (DismissDirection direction) async {
           return await showDialog(
@@ -70,7 +72,7 @@ class TransactionItem extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DetailsPage(transaction: transaction),
+                builder: (context) => DetailsPage(transaction: _transaction),
               ),
             );
           },
@@ -90,7 +92,7 @@ class TransactionItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(18),
                 ),
                 child: Text(
-                  '${transaction.amount.parseCurrency()}',
+                  '${_transaction.amount.parseCurrency()}',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -103,7 +105,7 @@ class TransactionItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      transaction.title,
+                      _transaction.title,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -112,7 +114,7 @@ class TransactionItem extends StatelessWidget {
                       maxLines: 2,
                     ),
                     Text(
-                      DateFormat.yMMMd().format(transaction.date),
+                      DateFormat.yMMMd().format(_transaction.date),
                       style: TextStyle(
                         color: Colors.grey[600],
                       ),

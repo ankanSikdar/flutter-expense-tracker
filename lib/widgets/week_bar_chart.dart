@@ -5,32 +5,32 @@ import 'dart:math';
 import 'package:expense_app/models/models.dart';
 
 class WeekBarChart extends StatefulWidget {
-  final List<Transaction> transactions;
+  final List<Transaction> _transactions;
 
-  WeekBarChart({this.transactions});
+  WeekBarChart({List<Transaction> transactions}) : _transactions = transactions;
 
   @override
   State<StatefulWidget> createState() => WeekBarChartState();
 }
 
 class WeekBarChartState extends State<WeekBarChart> {
-  final Color barBackgroundColor = Colors.white;
-  int touchedIndex;
-  double total;
-  List<double> spendings = List.generate(7, (index) => 0);
+  final Color _barBackgroundColor = Colors.white;
+  int _touchedIndex;
+  double _total;
+  List<double> _spendings = List.generate(7, (index) => 0);
 
-  double calculateTotal() {
-    if (spendings.isNotEmpty) {
-      spendings.clear();
-      spendings = List.generate(7, (index) => 0);
+  double _calculateTotal() {
+    if (_spendings.isNotEmpty) {
+      _spendings.clear();
+      _spendings = List.generate(7, (index) => 0);
     }
 
-    if (widget.transactions.isEmpty) {
+    if (widget._transactions.isEmpty) {
       return 0;
     }
     double sum = 0;
-    for (Transaction transaction in widget.transactions) {
-      spendings[transaction.date.weekday - 1] += transaction.amount;
+    for (Transaction transaction in widget._transactions) {
+      _spendings[transaction.date.weekday - 1] += transaction.amount;
       // print('D: ${transaction.date.weekday} A: ${transaction.amount}');
       sum += transaction.amount;
     }
@@ -39,8 +39,8 @@ class WeekBarChartState extends State<WeekBarChart> {
 
   @override
   Widget build(BuildContext context) {
-    calculateTotal();
-    total = spendings.reduce(max);
+    _calculateTotal();
+    _total = _spendings.reduce(max);
     return Card(
       margin: EdgeInsets.all(10),
       elevation: 7,
@@ -81,7 +81,7 @@ class WeekBarChartState extends State<WeekBarChart> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: BarChart(
-                      mainBarData(),
+                      _mainBarData(),
                     ),
                   ),
                 ),
@@ -96,7 +96,7 @@ class WeekBarChartState extends State<WeekBarChart> {
     );
   }
 
-  BarChartGroupData makeGroupData(
+  BarChartGroupData _makeGroupData(
     int x,
     double y, {
     bool isTouched = false,
@@ -111,36 +111,43 @@ class WeekBarChartState extends State<WeekBarChart> {
           colors: [isTouched ? Theme.of(context).primaryColorDark : barColor],
           width: width,
           backDrawRodData: BackgroundBarChartRodData(
-              show: true, y: total, // Length of all Bars
-              colors: [barBackgroundColor]),
+              show: true, y: _total, // Length of all Bars
+              colors: [_barBackgroundColor]),
         ),
       ],
     );
   }
 
   // Actual Data
-  List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
+  List<BarChartGroupData> _showingGroups() => List.generate(7, (i) {
         switch (i) {
           case 0:
-            return makeGroupData(0, spendings[0], isTouched: i == touchedIndex);
+            return _makeGroupData(0, _spendings[0],
+                isTouched: i == _touchedIndex);
           case 1:
-            return makeGroupData(1, spendings[1], isTouched: i == touchedIndex);
+            return _makeGroupData(1, _spendings[1],
+                isTouched: i == _touchedIndex);
           case 2:
-            return makeGroupData(2, spendings[2], isTouched: i == touchedIndex);
+            return _makeGroupData(2, _spendings[2],
+                isTouched: i == _touchedIndex);
           case 3:
-            return makeGroupData(3, spendings[3], isTouched: i == touchedIndex);
+            return _makeGroupData(3, _spendings[3],
+                isTouched: i == _touchedIndex);
           case 4:
-            return makeGroupData(4, spendings[4], isTouched: i == touchedIndex);
+            return _makeGroupData(4, _spendings[4],
+                isTouched: i == _touchedIndex);
           case 5:
-            return makeGroupData(5, spendings[5], isTouched: i == touchedIndex);
+            return _makeGroupData(5, _spendings[5],
+                isTouched: i == _touchedIndex);
           case 6:
-            return makeGroupData(6, spendings[6], isTouched: i == touchedIndex);
+            return _makeGroupData(6, _spendings[6],
+                isTouched: i == _touchedIndex);
           default:
             return null;
         }
       });
 
-  BarChartData mainBarData() {
+  BarChartData _mainBarData() {
     return BarChartData(
       barTouchData: BarTouchData(
         touchTooltipData: BarTouchTooltipData(
@@ -179,9 +186,9 @@ class WeekBarChartState extends State<WeekBarChart> {
             if (barTouchResponse != null &&
                 barTouchResponse.spot != null &&
                 touchEvent.isInterestedForInteractions) {
-              touchedIndex = barTouchResponse.spot.touchedBarGroupIndex;
+              _touchedIndex = barTouchResponse.spot.touchedBarGroupIndex;
             } else {
-              touchedIndex = -1;
+              _touchedIndex = -1;
             }
           });
         },
@@ -225,7 +232,7 @@ class WeekBarChartState extends State<WeekBarChart> {
       borderData: FlBorderData(
         show: false,
       ),
-      barGroups: showingGroups(),
+      barGroups: _showingGroups(),
     );
   }
 }

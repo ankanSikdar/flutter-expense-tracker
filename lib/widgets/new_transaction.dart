@@ -16,20 +16,20 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-  final dateController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
-  DateTime pickedDate;
-  File imageFile;
-  Directory appLibraryDirectory;
-  GalleryController controller;
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  final _dateController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  DateTime _pickedDate;
+  File _imageFile;
+  Directory _appLibraryDirectory;
+  GalleryController _controller;
 
   @override
   void initState() {
     super.initState();
-    updateDirectory();
-    controller = GalleryController(
+    _updateDirectory();
+    _controller = GalleryController(
       gallerySetting: GallerySetting(
         enableCamera: true,
         maximum: 1,
@@ -37,7 +37,7 @@ class _NewTransactionState extends State<NewTransaction> {
         onItemClick: (entity, list) async {
           if (list.isNotEmpty) {
             final file = await list[0].entity.file;
-            updateImage(file);
+            _updateImage(file);
             Navigator.pop(context);
           }
         },
@@ -45,41 +45,41 @@ class _NewTransactionState extends State<NewTransaction> {
     );
   }
 
-  Future<void> updateDirectory() async {
-    appLibraryDirectory = await getApplicationDocumentsDirectory();
-    appLibraryDirectory = await appLibraryDirectory.create();
+  Future<void> _updateDirectory() async {
+    _appLibraryDirectory = await getApplicationDocumentsDirectory();
+    _appLibraryDirectory = await _appLibraryDirectory.create();
   }
 
-  void updateImage(File image) {
+  void _updateImage(File image) {
     final fileExtension = image.path.split('.').last;
     if (fileExtension == 'jpg' ||
         fileExtension == 'jpeg' ||
         fileExtension == 'png') {
       setState(() {
-        imageFile = image;
+        _imageFile = image;
       });
     }
   }
 
-  void onSubmit() async {
-    if (!formKey.currentState.validate()) {
+  void _onSubmit() async {
+    if (!_formKey.currentState.validate()) {
       return;
     }
     File writtenFile;
-    if (imageFile != null) {
-      final imageFilePath = '${appLibraryDirectory.path}/${Uuid().v4()}.png';
+    if (_imageFile != null) {
+      final imageFilePath = '${_appLibraryDirectory.path}/${Uuid().v4()}.png';
       final emptyFile = await File(imageFilePath).create();
-      writtenFile = await emptyFile.writeAsBytes(imageFile.readAsBytesSync());
+      writtenFile = await emptyFile.writeAsBytes(_imageFile.readAsBytesSync());
     }
     final tBloc = context.read<TransactionsBloc>();
     tBloc.add(
       AddTransaction(
         transaction: Transaction(
           id: Uuid().v4(),
-          title: titleController.text,
-          amount: double.parse(amountController.text),
-          date: pickedDate,
-          imagePath: imageFile == null ? '' : writtenFile.path,
+          title: _titleController.text,
+          amount: double.parse(_amountController.text),
+          date: _pickedDate,
+          imagePath: _imageFile == null ? '' : writtenFile.path,
           createdOn: DateTime.now(),
         ),
       ),
@@ -87,7 +87,7 @@ class _NewTransactionState extends State<NewTransaction> {
     Navigator.pop(context);
   }
 
-  void startDatePicker() {
+  void _startDatePicker() {
     showDatePicker(
             context: context,
             initialDate: DateTime.now(),
@@ -97,14 +97,14 @@ class _NewTransactionState extends State<NewTransaction> {
       if (value == null) {
         return;
       }
-      pickedDate = value;
-      dateController.text = DateFormat.yMMMd().format(pickedDate);
+      _pickedDate = value;
+      _dateController.text = DateFormat.yMMMd().format(_pickedDate);
     });
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -130,13 +130,13 @@ class _NewTransactionState extends State<NewTransaction> {
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: Form(
-            key: formKey,
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Title'),
-                  controller: titleController,
+                  controller: _titleController,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Title cannot be empty';
@@ -150,8 +150,8 @@ class _NewTransactionState extends State<NewTransaction> {
                     prefixText: getCurrencySymbol(),
                   ),
                   keyboardType: TextInputType.number,
-                  controller: amountController,
-                  onFieldSubmitted: (_) => startDatePicker(),
+                  controller: _amountController,
+                  onFieldSubmitted: (_) => _startDatePicker(),
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Amount cannot be empty';
@@ -179,7 +179,7 @@ class _NewTransactionState extends State<NewTransaction> {
                       Expanded(
                         child: TextFormField(
                           readOnly: true,
-                          controller: dateController,
+                          controller: _dateController,
                           decoration: InputDecoration(labelText: 'Date'),
                           enableInteractiveSelection: false,
                           validator: (value) {
@@ -191,7 +191,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         ),
                       ),
                       FlatButton(
-                        onPressed: startDatePicker,
+                        onPressed: _startDatePicker,
                         child: Text(
                           'Choose Date',
                           style: TextStyle(
@@ -207,23 +207,23 @@ class _NewTransactionState extends State<NewTransaction> {
                   children: [
                     IconButton(
                       onPressed: () async {
-                        final entity = await controller.pick(context);
+                        final entity = await _controller.pick(context);
                         if (entity.isNotEmpty) {
                           final file = await entity[0].entity.file;
-                          updateImage(file);
+                          _updateImage(file);
                         }
                       },
                       icon: Icon(Icons.image),
                     ),
-                    if (imageFile != null)
+                    if (_imageFile != null)
                       Container(
                         height: 50,
                         width: 50,
-                        child: Image.file(imageFile),
+                        child: Image.file(_imageFile),
                       ),
                     Spacer(),
                     FlatButton(
-                      onPressed: onSubmit,
+                      onPressed: _onSubmit,
                       child: Text(
                         'Add Transaction',
                         style: TextStyle(
