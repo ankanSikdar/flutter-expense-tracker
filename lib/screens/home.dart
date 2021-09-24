@@ -48,25 +48,30 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             }
             return state.transactionsList.isEmpty
-                ? Column(
-                    children: [
-                      Text(
-                        'No Transactions Added Yet!',
-                        style: TextStyle(
-                          fontSize: 20,
+                ? Padding(
+                    padding: EdgeInsets.only(top: 32.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'No Transactions Added Yet!',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        height: 400.0,
-                        width: double.infinity,
-                        child: Image.asset(
-                          'assets/images/waiting.png',
+                        SizedBox(
+                          height: 20,
                         ),
-                      ),
-                    ],
+                        Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          child: Image.asset(
+                            'assets/images/wallet.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 : Column(
                     children: [
