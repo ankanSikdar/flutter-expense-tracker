@@ -62,4 +62,16 @@ class TransactionsRepository {
       throw Exception('Unable to get delete transaction.');
     }
   }
+
+  Future<List<Transaction>> filterTransactions(
+      {@required String keyword}) async {
+    try {
+      final filtered =
+          await _db.query(_tableName, where: 'title = ?', whereArgs: [keyword]);
+      final list = filtered.map((e) => Transaction.fromMap(e)).toList();
+      return list;
+    } catch (e) {
+      throw Exception('Unable to filter transactions.');
+    }
+  }
 }
