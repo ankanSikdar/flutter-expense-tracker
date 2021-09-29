@@ -103,34 +103,26 @@ class _NewTransactionState extends State<NewTransaction> {
       writtenFile = await emptyFile.writeAsBytes(_imageFile.readAsBytesSync());
     }
     final tBloc = context.read<TransactionsBloc>();
+    final transaction = Transaction(
+      id: widget.state == NewTransactionState.add
+          ? Uuid().v4()
+          : widget.transaction.id,
+      title: _titleController.text,
+      amount: double.parse(_amountController.text),
+      date: _pickedDate,
+      imagePath: _imageFile == null ? '' : writtenFile.path,
+      createdOn: DateTime.now(),
+    );
     if (widget.state == NewTransactionState.add) {
       tBloc.add(
-        AddTransaction(
-          transaction: Transaction(
-            id: Uuid().v4(),
-            title: _titleController.text,
-            amount: double.parse(_amountController.text),
-            date: _pickedDate,
-            imagePath: _imageFile == null ? '' : writtenFile.path,
-            createdOn: DateTime.now(),
-          ),
-        ),
+        AddTransaction(transaction: transaction),
       );
     } else {
       tBloc.add(
-        UpdateTransaction(
-          transaction: Transaction(
-            id: widget.transaction.id,
-            title: _titleController.text,
-            amount: double.parse(_amountController.text),
-            date: _pickedDate,
-            imagePath: _imageFile == null ? '' : writtenFile.path,
-            createdOn: DateTime.now(),
-          ),
-        ),
+        UpdateTransaction(transaction: transaction),
       );
     }
-    Navigator.of(context).pop(widget.state == NewTransactionState.edit);
+    Navigator.of(context).pop(transaction);
   }
 
   void _startDatePicker() {

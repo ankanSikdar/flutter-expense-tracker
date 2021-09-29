@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 
 class DetailsPage extends StatelessWidget {
   final Transaction _transaction;
-  const DetailsPage({Key key, Transaction transaction})
+  const DetailsPage({Key key, @required Transaction transaction})
       : _transaction = transaction,
         super(key: key);
 
@@ -50,15 +50,21 @@ class DetailsPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final isEdited = await showModalBottomSheet(
+          final editedTransaction = await showModalBottomSheet(
             context: context,
             builder: (_) => NewTransaction.edit(
               transaction: _transaction,
             ),
             isScrollControlled: true,
           );
-          if (isEdited != null && isEdited as bool) {
-            Navigator.of(context).pop();
+          if (editedTransaction != null) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    DetailsPage(transaction: editedTransaction as Transaction),
+              ),
+            );
           }
         },
         child: Icon(Icons.edit),
