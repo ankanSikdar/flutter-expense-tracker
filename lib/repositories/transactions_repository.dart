@@ -66,8 +66,8 @@ class TransactionsRepository {
   Future<List<Transaction>> filterTransactions(
       {@required String keyword}) async {
     try {
-      final filtered =
-          await _db.query(_tableName, where: 'title = ?', whereArgs: [keyword]);
+      final filtered = await _db
+          .query(_tableName, where: 'title LIKE ?', whereArgs: ['%$keyword%']);
       final list = filtered.map((e) => Transaction.fromMap(e)).toList();
       return list;
     } catch (e) {

@@ -1,4 +1,6 @@
 import 'package:expense_app/blocs/app_blocs.dart';
+import 'package:expense_app/repositories/repositories.dart';
+import 'package:expense_app/screens/screens.dart';
 import 'package:expense_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,24 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     AppBar _appbar = AppBar(
       title: Text('Expense Tracker'),
+      actions: [
+        IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider<SearchCubit>(
+                    create: (context) => SearchCubit(
+                      transactionsRepository:
+                          context.read<TransactionsRepository>(),
+                    )..loadAll(),
+                    child: SearchPage(),
+                  ),
+                ),
+              );
+            },
+            icon: Icon(Icons.search))
+      ],
     );
 
     return Scaffold(
