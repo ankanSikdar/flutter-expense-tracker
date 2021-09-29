@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:ui';
 import 'package:expense_app/extensions/extensions.dart';
 import 'package:expense_app/models/models.dart';
+import 'package:expense_app/widgets/new_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -18,7 +20,7 @@ class DetailsPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 54.0),
           child: Column(
             children: [
               DetailsRow(title: 'Title:', content: _transaction.title),
@@ -45,6 +47,21 @@ class DetailsPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final isEdited = await showModalBottomSheet(
+            context: context,
+            builder: (_) => NewTransaction.edit(
+              transaction: _transaction,
+            ),
+            isScrollControlled: true,
+          );
+          if (isEdited != null && isEdited as bool) {
+            Navigator.of(context).pop();
+          }
+        },
+        child: Icon(Icons.edit),
       ),
     );
   }

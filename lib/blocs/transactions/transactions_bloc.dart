@@ -50,6 +50,19 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
           emit(state.copyWith(status: TStatus.error, error: e));
         }
       }
+
+      if (event is UpdateTransaction) {
+        emit(state.copyWith(status: TStatus.loading));
+        try {
+          await _transactionsRepository.updateTransaction(
+              transaction: event.transaction);
+          final transactions =
+              await _transactionsRepository.getAllTransactions();
+          add(UpdateTransactions(transactions: transactions));
+        } catch (e) {
+          emit(state.copyWith(status: TStatus.error, error: e));
+        }
+      }
     });
   }
 }

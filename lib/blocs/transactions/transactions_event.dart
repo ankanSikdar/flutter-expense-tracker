@@ -37,3 +37,12 @@ class RemoveTransaction extends TransactionsEvent {
   @override
   List<Object> get props => [transactionID];
 }
+
+class UpdateTransaction extends TransactionsEvent {
+  final Transaction transaction;
+
+  UpdateTransaction({@required this.transaction});
+
+  @override
+  List<Object> get props => [transaction];
+}

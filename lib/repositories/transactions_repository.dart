@@ -74,4 +74,14 @@ class TransactionsRepository {
       throw Exception('Unable to filter transactions.');
     }
   }
+
+  Future<bool> updateTransaction({@required Transaction transaction}) async {
+    try {
+      await _db.update(_tableName, transaction.toMap(),
+          where: 'id = ?', whereArgs: [transaction.id]);
+      return true;
+    } catch (e) {
+      throw Exception('Unable to update transaction.');
+    }
+  }
 }

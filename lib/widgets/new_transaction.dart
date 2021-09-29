@@ -1,16 +1,37 @@
 import 'dart:io';
 
-import 'package:expense_app/blocs/app_blocs.dart';
-import 'package:expense_app/extensions/extensions.dart';
-import 'package:expense_app/models/models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:likk_picker/likk_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:expense_app/blocs/app_blocs.dart';
+import 'package:expense_app/extensions/extensions.dart';
+import 'package:expense_app/models/models.dart';
+
+enum NewTransactionState {
+  edit,
+  add,
+}
 
 class NewTransaction extends StatefulWidget {
+  final NewTransactionState state;
+  final Transaction transaction;
+
+  NewTransaction.add({
+    Key key,
+  })  : this.state = NewTransactionState.add,
+        this.transaction = null,
+        super(key: key);
+
+  NewTransaction.edit({
+    Key key,
+    @required this.transaction,
+  })  : this.state = NewTransactionState.edit,
+        super(key: key);
+
   @override
   _NewTransactionState createState() => _NewTransactionState();
 }
@@ -43,6 +64,16 @@ class _NewTransactionState extends State<NewTransaction> {
         },
       ),
     );
+
+    if (widget.state == NewTransactionState.edit) {
+      _titleController.text = widget.transaction.title;
+      _amountController.text = widget.transaction.amount.toString();
+      _pickedDate = widget.transaction.date;
+      _dateController.text = DateFormat.yMMMd().format(_pickedDate);
+      widget.transaction.imagePath.isNotEmpty
+          ? _imageFile = File(widget.transaction.imagePath)
+          : _imageFile = null;
+    }
   }
 
   Future<void> _updateDirectory() async {
@@ -72,19 +103,34 @@ class _NewTransactionState extends State<NewTransaction> {
       writtenFile = await emptyFile.writeAsBytes(_imageFile.readAsBytesSync());
     }
     final tBloc = context.read<TransactionsBloc>();
-    tBloc.add(
-      AddTransaction(
-        transaction: Transaction(
-          id: Uuid().v4(),
-          title: _titleController.text,
-          amount: double.parse(_amountController.text),
-          date: _pickedDate,
-          imagePath: _imageFile == null ? '' : writtenFile.path,
-          createdOn: DateTime.now(),
+    if (widget.state == NewTransactionState.add) {
+      tBloc.add(
+        AddTransaction(
+          transaction: Transaction(
+            id: Uuid().v4(),
+            title: _titleController.text,
+            amount: double.parse(_amountController.text),
+            date: _pickedDate,
+            imagePath: _imageFile == null ? '' : writtenFile.path,
+            createdOn: DateTime.now(),
+          ),
         ),
-      ),
-    );
-    Navigator.pop(context);
+      );
+    } else {
+      tBloc.add(
+        UpdateTransaction(
+          transaction: Transaction(
+            id: widget.transaction.id,
+            title: _titleController.text,
+            amount: double.parse(_amountController.text),
+            date: _pickedDate,
+            imagePath: _imageFile == null ? '' : writtenFile.path,
+            createdOn: DateTime.now(),
+          ),
+        ),
+      );
+    }
+    Navigator.of(context).pop(widget.state == NewTransactionState.edit);
   }
 
   void _startDatePicker() {
@@ -225,7 +271,9 @@ class _NewTransactionState extends State<NewTransaction> {
                     FlatButton(
                       onPressed: _onSubmit,
                       child: Text(
-                        'Add Transaction',
+                        widget.state == NewTransactionState.add
+                            ? 'Add Transaction'
+                            : 'Update',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
