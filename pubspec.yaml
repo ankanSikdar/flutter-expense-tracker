@@ -28,6 +28,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^7.3.0
+  google_mobile_ads: ^0.13.5
   intl: ^0.16.1
   likk_picker: ^1.0.7+1
   path_provider: ^2.0.5

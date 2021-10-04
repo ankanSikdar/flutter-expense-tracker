@@ -1,5 +1,8 @@
 key.properties
 
+# Ads IDs
+ad_ids.dart
+
 # Miscellaneous
 *.class
 *.log
