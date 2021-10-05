@@ -23,12 +23,7 @@ class TransactionList extends StatelessWidget {
               TransactionItem(
                   transaction: _transactions[index],
                   deleteTransaction: _deleteTransaction),
-              Container(
-                width: double.infinity,
-                height: 50.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0),
-                child: BannerAdWidget(),
-              ),
+              BannerAdWidget(),
             ],
           );
         }
