@@ -18,10 +18,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (context) => TransactionsRepository(),
-      child: BlocProvider<TransactionsBloc>(
-        create: (context) => TransactionsBloc(
-          transactionsRepository: context.read<TransactionsRepository>(),
-        )..add(GetTransactions()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<TransactionsBloc>(
+            create: (context) => TransactionsBloc(
+              transactionsRepository: context.read<TransactionsRepository>(),
+            )..add(GetTransactions()),
+          ),
+          BlocProvider(
+            create: (context) => GoogleAdsCubit(),
+          ),
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Expense Tracker',

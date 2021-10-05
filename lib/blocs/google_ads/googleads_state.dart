@@ -1,4 +1,4 @@
-part of 'googleads_bloc.dart';
+part of 'googleads_cubit.dart';
 
 enum AdsStatus {
   initial,
@@ -10,7 +10,6 @@ enum AdsStatus {
 class GoogleAdsState extends Equatable {
   final Future<InitializationStatus> adsState;
   final AdsStatus status;
-  final BannerAd bannerAd;
 
   final interstitialAdLoadCallback = FullScreenContentCallback(
     onAdShowedFullScreenContent: (InterstitialAd ad) =>
@@ -55,18 +54,17 @@ class GoogleAdsState extends Equatable {
   GoogleAdsState({
     @required this.adsState,
     @required this.status,
-    @required this.bannerAd,
   });
 
   factory GoogleAdsState.initial() {
     return GoogleAdsState(
-        adsState: MobileAds.instance.initialize(),
-        status: AdsStatus.initial,
-        bannerAd: null);
+      adsState: MobileAds.instance.initialize(),
+      status: AdsStatus.initial,
+    );
   }
 
   @override
-  List<Object> get props => [adsState];
+  List<Object> get props => [adsState, status];
 
   GoogleAdsState copyWith({
     Future<InitializationStatus> adsState,
@@ -76,7 +74,6 @@ class GoogleAdsState extends Equatable {
     return GoogleAdsState(
       adsState: adsState ?? this.adsState,
       status: status ?? this.status,
-      bannerAd: bannerAd ?? this.bannerAd,
     );
   }
 }
