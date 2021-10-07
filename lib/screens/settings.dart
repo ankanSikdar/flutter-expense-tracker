@@ -1,3 +1,4 @@
+import 'package:expense_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -14,36 +15,10 @@ class SettingsPage extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                color: Theme.of(context).primaryColor,
-                child: InkWell(
-                  onTap: () {},
-                  borderRadius: BorderRadius.circular(18),
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.color_lens_rounded,
-                          size: 40.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 16.0),
-                        Text(
-                          'Change Theme',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              SettingsCard(
+                onTap: () {},
+                icon: Icons.color_lens_rounded,
+                title: 'Change Theme',
               ),
             ],
           ),
