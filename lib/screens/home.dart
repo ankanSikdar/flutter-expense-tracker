@@ -41,7 +41,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             },
-            icon: Icon(Icons.search))
+            icon: Icon(Icons.search)),
+        IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsPage(),
+                ),
+              );
+            },
+            icon: Icon(Icons.settings))
       ],
     );
 
