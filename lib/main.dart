@@ -28,27 +28,34 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => GoogleAdsCubit(),
           ),
+          BlocProvider(
+            create: (context) => ThemeCubit(),
+          ),
         ],
-        child: MaterialApp(
+        child: Builder(
+          builder: (context) => ExpenseTrackerApp(),
+        ),
+      ),
+    );
+  }
+}
+
+class ExpenseTrackerApp extends StatelessWidget {
+  const ExpenseTrackerApp({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, state) {
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Expense Tracker',
           home: MyHomePage(),
-          theme: ThemeData(
-            primarySwatch: Colors.purple,
-            accentColor: Colors.amber,
-            fontFamily: 'Poppins',
-            appBarTheme: AppBarTheme(
-              textTheme: ThemeData.light().textTheme.copyWith(
-                    headline6: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-            ),
-          ),
-        ),
-      ),
+          theme: state.theme,
+        );
+      },
     );
   }
 }
