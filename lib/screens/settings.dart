@@ -1,3 +1,4 @@
+import 'package:expense_app/screens/screens.dart';
 import 'package:expense_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,13 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             children: [
               SettingsCard(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ChangeThemePage(),
+                    ),
+                  );
+                },
                 icon: Icons.color_lens_rounded,
                 title: 'Change Theme',
               ),
