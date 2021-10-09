@@ -45,7 +45,7 @@ class WeekBarChartState extends State<WeekBarChart> {
       margin: EdgeInsets.all(10),
       elevation: 7,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      color: Colors.amber,
+      color: Theme.of(context).accentColor,
       child: Stack(
         children: <Widget>[
           Padding(
@@ -100,7 +100,6 @@ class WeekBarChartState extends State<WeekBarChart> {
     int x,
     double y, {
     bool isTouched = false,
-    Color barColor = Colors.purple,
     double width = 22,
   }) {
     return BarChartGroupData(
@@ -108,7 +107,11 @@ class WeekBarChartState extends State<WeekBarChart> {
       barRods: [
         BarChartRodData(
           y: isTouched ? y + 1 : y,
-          colors: [isTouched ? Theme.of(context).primaryColorDark : barColor],
+          colors: [
+            isTouched
+                ? Theme.of(context).primaryColorDark
+                : Theme.of(context).primaryColor
+          ],
           width: width,
           backDrawRodData: BackgroundBarChartRodData(
               show: true, y: _total, // Length of all Bars
