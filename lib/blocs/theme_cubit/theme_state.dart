@@ -25,14 +25,14 @@ final purpleTheme = ThemeData(
 
 final redTheme = ThemeData(
   primarySwatch: Colors.red,
-  accentColor: Colors.amber,
+  accentColor: Colors.grey[350],
   fontFamily: 'Poppins',
   appBarTheme: appBarTheme,
 );
 
 final blueTheme = ThemeData(
   primarySwatch: Colors.blue,
-  accentColor: Colors.amber,
+  accentColor: Colors.blueGrey.shade200,
   fontFamily: 'Poppins',
   appBarTheme: appBarTheme,
 );
