@@ -233,7 +233,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         child: Text(
                           'Choose Date',
                           style: TextStyle(
-                            color: Colors.purple,
+                            color: Theme.of(context).primaryColor,
                             fontSize: 16,
                           ),
                         ),
@@ -271,7 +271,7 @@ class _NewTransactionState extends State<NewTransaction> {
                           fontSize: 18,
                         ),
                       ),
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
