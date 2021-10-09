@@ -24,4 +24,13 @@ class ThemeCubit extends Cubit<ThemeState> {
       ),
     );
   }
+
+  void toBlue() {
+    emit(
+      state.copyWith(
+        color: ThemeColor.blue,
+        theme: blueTheme,
+      ),
+    );
+  }
 }
