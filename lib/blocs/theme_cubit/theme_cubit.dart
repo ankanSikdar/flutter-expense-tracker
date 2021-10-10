@@ -1,11 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit() : super(ThemeState.initial());
+  final SharedPreferences _preferences;
+
+  ThemeCubit({@required SharedPreferences preferences})
+      : _preferences = preferences,
+        super(ThemeState.initial()) {
+    loadThemeIfPresent();
+  }
 
   void toRed() {
     emit(
@@ -14,6 +22,7 @@ class ThemeCubit extends Cubit<ThemeState> {
         theme: redTheme,
       ),
     );
+    saveTheme(ThemeColor.red);
   }
 
   void toPurple() {
@@ -23,6 +32,7 @@ class ThemeCubit extends Cubit<ThemeState> {
         theme: purpleTheme,
       ),
     );
+    saveTheme(ThemeColor.purple);
   }
 
   void toBlue() {
@@ -31,6 +41,32 @@ class ThemeCubit extends Cubit<ThemeState> {
         color: ThemeColor.blue,
         theme: blueTheme,
       ),
+    );
+    saveTheme(ThemeColor.blue);
+  }
+
+  void loadThemeIfPresent() {
+    final savedTheme = _preferences.getString('theme');
+    if (savedTheme != null) {
+      ThemeColor color = ThemeColor.values
+          .firstWhere((element) => element.toString() == savedTheme);
+      switch (color) {
+        case ThemeColor.blue:
+          toBlue();
+          break;
+        case ThemeColor.purple:
+          toPurple();
+          break;
+        case ThemeColor.red:
+          toRed();
+      }
+    }
+  }
+
+  void saveTheme(ThemeColor color) {
+    _preferences.setString(
+      'theme',
+      color.toString(),
     );
   }
 }

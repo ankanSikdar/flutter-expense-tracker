@@ -32,6 +32,7 @@ dependencies:
   intl: ^0.16.1
   likk_picker: ^1.0.7+1
   path_provider: ^2.0.5
+  shared_preferences: ^2.0.8
   sqflite: ^2.0.0+4
   uuid: ^3.0.4
 
