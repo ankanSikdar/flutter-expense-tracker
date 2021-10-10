@@ -18,7 +18,7 @@ class SettingsCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(18),
       ),
-      color: Theme.of(context).primaryColor,
+      color: Colors.white,
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(18),
@@ -29,7 +29,7 @@ class SettingsCard extends StatelessWidget {
               Icon(
                 icon,
                 size: 40.0,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
               ),
               SizedBox(width: 16.0),
               Text(
@@ -37,7 +37,7 @@ class SettingsCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Theme.of(context).primaryColor,
                 ),
               )
             ],
