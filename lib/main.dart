@@ -32,9 +32,7 @@ class MyApp extends StatelessWidget {
             create: (context) => ThemeCubit(),
           ),
         ],
-        child: Builder(
-          builder: (context) => ExpenseTrackerApp(),
-        ),
+        child: ExpenseTrackerApp(),
       ),
     );
   }
