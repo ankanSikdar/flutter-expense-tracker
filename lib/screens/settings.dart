@@ -27,6 +27,21 @@ class SettingsPage extends StatelessWidget {
                 icon: Icons.color_lens_rounded,
                 title: 'Change Theme',
               ),
+              SettingsCard(
+                onTap: () {},
+                icon: Icons.person,
+                title: 'Developer Contact',
+              ),
+              SettingsCard(
+                onTap: () {},
+                icon: Icons.local_parking_outlined,
+                title: 'Privacy Policy',
+              ),
+              SettingsCard(
+                onTap: () {},
+                icon: Icons.info_rounded,
+                title: 'About App',
+              ),
             ],
           ),
         ),
