@@ -38,7 +38,13 @@ class SettingsPage extends StatelessWidget {
                 title: 'Privacy Policy',
               ),
               SettingsCard(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AboutPage(),
+                    ),
+                  );
+                },
                 icon: Icons.info_rounded,
                 title: 'About App',
               ),
