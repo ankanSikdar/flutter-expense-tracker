@@ -32,7 +32,7 @@ class _WeekPieChartState extends State<WeekPieChart> {
       margin: EdgeInsets.all(10),
       elevation: 7,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      color: Colors.amber,
+      color: Theme.of(context).accentColor,
       child: Stack(
         children: <Widget>[
           Padding(
