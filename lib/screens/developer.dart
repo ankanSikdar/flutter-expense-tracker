@@ -2,9 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'package:expense_app/widgets/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DeveloperPage extends StatelessWidget {
   const DeveloperPage({Key key}) : super(key: key);
+
+  Future<void> _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+      );
+    } else {
+      print('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,43 +88,43 @@ class DeveloperPage extends StatelessWidget {
               icon: FontAwesomeIcons.github,
               label: 'GitHub',
               onPressed: () {
-                // _launchUrl('https://github.com/ankanSikdar');
+                _launchUrl('https://github.com/ankanSikdar');
               },
             ),
             DevLink(
               icon: FontAwesomeIcons.linkedin,
               label: 'LinkedIn',
               onPressed: () {
-                // _launchUrl('https://www.linkedin.com/in/ankansikdar/');
+                _launchUrl('https://www.linkedin.com/in/ankansikdar/');
               },
             ),
             DevLink(
               icon: FontAwesomeIcons.facebook,
               label: 'Facebook',
               onPressed: () {
-                // _launchUrl('https://www.facebook.com/ankanSikdar/');
+                _launchUrl('https://www.facebook.com/ankanSikdar/');
               },
             ),
             DevLink(
               icon: FontAwesomeIcons.twitter,
               label: 'Twitter',
               onPressed: () {
-                // _launchUrl('https://twitter.com/ankan_sikdar');
+                _launchUrl('https://twitter.com/ankan_sikdar');
               },
             ),
             DevLink(
               icon: FontAwesomeIcons.instagram,
               label: 'Instagram',
               onPressed: () {
-                // _launchUrl('https://www.instagram.com/ankan_sikdar/');
+                _launchUrl('https://www.instagram.com/ankan_sikdar/');
               },
             ),
             DevLink(
               icon: FontAwesomeIcons.solidEnvelope,
               label: 'Send Email',
               onPressed: () {
-                // _launchUrl(
-                //     'mailto:contact@ankan.dev?subject=Reason%20you%20are%20contacting%20me&body=Hello%20Ankan%21');
+                _launchUrl(
+                    'mailto:contact@ankan.dev?subject=Reason%20you%20are%20contacting%20me&body=Hello%20Ankan%21');
               },
             ),
           ],
