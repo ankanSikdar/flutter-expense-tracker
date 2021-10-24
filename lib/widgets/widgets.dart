@@ -6,3 +6,4 @@ export 'week_pie_chart.dart';
 export 'banner_ad.dart';
 export 'settings_card.dart';
 export 'select_color_card.dart';
+export 'dev_link.dart';
