@@ -28,7 +28,13 @@ class SettingsPage extends StatelessWidget {
                 title: 'Change Theme',
               ),
               SettingsCard(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DeveloperPage(),
+                    ),
+                  );
+                },
                 icon: Icons.person,
                 title: 'Developer Contact',
               ),
