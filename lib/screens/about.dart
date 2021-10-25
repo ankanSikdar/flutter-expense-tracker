@@ -1,3 +1,4 @@
+import 'package:expense_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 
@@ -40,6 +41,7 @@ class _AboutPageState extends State<AboutPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(width: double.infinity),
+          RoundedImage(asset: 'assets/images/app_icon.png'),
           Text(
             appName,
             style:
