@@ -19,6 +19,13 @@ class ChangeThemePage extends StatelessWidget {
         child: Column(
           children: [
             SelectColorCard(
+              color: Colors.green,
+              onTap: () {
+                themeCubit.toGreen();
+              },
+              title: 'Green',
+            ),
+            SelectColorCard(
               color: Colors.purple,
               onTap: () {
                 themeCubit.toPurple();

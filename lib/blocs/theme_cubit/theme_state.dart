@@ -4,6 +4,7 @@ enum ThemeColor {
   red,
   purple,
   blue,
+  green,
 }
 
 final appBarTheme = AppBarTheme(
@@ -18,6 +19,13 @@ final appBarTheme = AppBarTheme(
 
 final purpleTheme = ThemeData(
   primarySwatch: Colors.purple,
+  accentColor: Colors.amber,
+  fontFamily: 'Poppins',
+  appBarTheme: appBarTheme,
+);
+
+final greenTheme = ThemeData(
+  primarySwatch: Colors.green,
   accentColor: Colors.amber,
   fontFamily: 'Poppins',
   appBarTheme: appBarTheme,
@@ -47,7 +55,7 @@ class ThemeState extends Equatable {
   });
 
   factory ThemeState.initial() {
-    return ThemeState(color: ThemeColor.purple, theme: purpleTheme);
+    return ThemeState(color: ThemeColor.green, theme: greenTheme);
   }
 
   @override

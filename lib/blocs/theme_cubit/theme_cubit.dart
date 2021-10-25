@@ -45,6 +45,16 @@ class ThemeCubit extends Cubit<ThemeState> {
     saveTheme(ThemeColor.blue);
   }
 
+  void toGreen() {
+    emit(
+      state.copyWith(
+        color: ThemeColor.green,
+        theme: greenTheme,
+      ),
+    );
+    saveTheme(ThemeColor.green);
+  }
+
   void loadThemeIfPresent() {
     final savedTheme = _preferences.getString('theme');
     if (savedTheme != null) {
@@ -56,6 +66,9 @@ class ThemeCubit extends Cubit<ThemeState> {
           break;
         case ThemeColor.purple:
           toPurple();
+          break;
+        case ThemeColor.green:
+          toGreen();
           break;
         case ThemeColor.red:
           toRed();
