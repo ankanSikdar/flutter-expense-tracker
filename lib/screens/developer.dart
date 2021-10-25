@@ -1,3 +1,4 @@
+import 'package:expense_app/widgets/details_title.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expense_app/widgets/widgets.dart';
@@ -31,18 +32,8 @@ class DeveloperPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width - 40,
-                height: MediaQuery.of(context).size.width - 40,
-                margin: const EdgeInsets.all(8.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      (MediaQuery.of(context).size.width - 40) / 2),
-                  child: Image.asset(
-                    'assets/images/ankan.jpeg',
-                    fit: BoxFit.contain,
-                  ),
-                ),
+              RoundedImage(
+                asset: 'assets/images/ankan.jpeg',
               ),
               SizedBox(height: 16.0),
               Text('Ankan Sikdar',
@@ -50,7 +41,7 @@ class DeveloperPage extends StatelessWidget {
               SizedBox(height: 16.0),
               Container(
                 width: double.infinity,
-                child: TitleWidget(title: 'About Me'),
+                child: DetailsTitle(title: 'About Me'),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.0),
@@ -63,7 +54,7 @@ class DeveloperPage extends StatelessWidget {
               SizedBox(height: 16.0),
               Row(
                 children: [
-                  TitleWidget(title: 'My Links'),
+                  DetailsTitle(title: 'My Links'),
                 ],
               ),
               SizedBox(height: 8.0),
@@ -121,26 +112,6 @@ class DeveloperPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class TitleWidget extends StatelessWidget {
-  final String title;
-  const TitleWidget({
-    @required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(4.0, 0.0, 0.0, 8.0),
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.headline6.apply(
-              color: Theme.of(context).primaryColor,
-            ),
       ),
     );
   }
