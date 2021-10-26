@@ -37,27 +37,30 @@ class _AboutPageState extends State<AboutPage> {
       appBar: AppBar(
         title: Text('About App'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(width: double.infinity),
-          RoundedImage(asset: 'assets/images/app_icon.png'),
-          Text(
-            appName,
-            style:
-                TextStyle(fontSize: 32, color: Theme.of(context).primaryColor),
-          ),
-          SizedBox(height: 32.0),
-          Text(
-            packageName,
-            style: TextStyle(fontSize: 20),
-          ),
-          SizedBox(height: 32.0),
-          Text(
-            'Version: $version',
-            style: TextStyle(fontSize: 18),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(width: double.infinity),
+            RoundedImage(asset: 'assets/images/app_icon.png'),
+            Text(
+              appName,
+              style: TextStyle(
+                  fontSize: 32, color: Theme.of(context).primaryColor),
+            ),
+            SizedBox(height: 32.0),
+            Text(
+              packageName,
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(height: 32.0),
+            Text(
+              'Version: $version',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 32.0),
+          ],
+        ),
       ),
     );
   }
