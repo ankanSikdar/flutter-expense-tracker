@@ -1,6 +1,7 @@
 import 'package:expense_app/screens/screens.dart';
 import 'package:expense_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key key}) : super(key: key);
@@ -39,7 +40,18 @@ class SettingsPage extends StatelessWidget {
                 title: 'Developer Contact',
               ),
               SettingsCard(
-                onTap: () {},
+                onTap: () async {
+                  final url = 'https://expense-tracker-privacy.web.app';
+                  if (await canLaunch(url)) {
+                    await launch(
+                      url,
+                      forceSafariVC: false,
+                      forceWebView: false,
+                    );
+                  } else {
+                    print('Could not launch $url');
+                  }
+                },
                 icon: Icons.local_parking_outlined,
                 title: 'Privacy Policy',
               ),
