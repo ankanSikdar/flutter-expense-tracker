@@ -73,8 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
           builder: (context, state) {
             if (state.status == TStatus.initial ||
                 state.status == TStatus.loading) {
-              return Center(
-                child: CircularProgressIndicator(),
+              return Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               );
             }
             return state.transactionsList.isEmpty
