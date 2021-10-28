@@ -233,7 +233,7 @@ class WeekBarChartState extends State<WeekBarChart> {
           ),
           rightTitles: SideTitles(
             getTextStyles: (context, value) => TextStyle(
-                color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold),
             showTitles: true,
           )),
       borderData: FlBorderData(
