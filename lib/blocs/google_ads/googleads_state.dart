@@ -11,20 +11,6 @@ class GoogleAdsState extends Equatable {
   final Future<InitializationStatus> adsState;
   final AdsStatus status;
 
-  final interstitialAdLoadCallback = FullScreenContentCallback(
-    onAdShowedFullScreenContent: (InterstitialAd ad) =>
-        print('$ad onAdShowedFullScreenContent.'),
-    onAdDismissedFullScreenContent: (InterstitialAd ad) {
-      print('$ad onAdDismissedFullScreenContent.');
-      ad.dispose();
-    },
-    onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-      print('$ad onAdFailedToShowFullScreenContent: $error');
-      ad.dispose();
-    },
-    onAdImpression: (InterstitialAd ad) => print('$ad impression occurred.'),
-  );
-
   final _bannerAdListener = BannerAdListener(
     // Called when an ad is successfully received.
     onAdLoaded: (Ad ad) => print('Ad loaded.'),
