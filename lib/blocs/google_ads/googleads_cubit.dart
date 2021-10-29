@@ -17,7 +17,8 @@ class GoogleAdsCubit extends Cubit<GoogleAdsState> {
       await state.adsState;
       emit(state.copyWith(status: AdsStatus.loaded));
     } catch (e) {
-      print('AdLoad Failed');
+      // * Getting Ready for Release
+      // print('AdLoad Failed');
       emit(state.copyWith(status: AdsStatus.error));
     }
   }

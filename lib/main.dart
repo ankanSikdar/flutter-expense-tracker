@@ -11,7 +11,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  Bloc.observer = AppBlocObserver();
+  // * Getting Ready for Release
+  // Bloc.observer = AppBlocObserver();
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(new MyApp(sharedPreferences: sharedPreferences));
 }

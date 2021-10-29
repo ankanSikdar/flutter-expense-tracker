@@ -49,7 +49,8 @@ class SettingsPage extends StatelessWidget {
                       forceWebView: false,
                     );
                   } else {
-                    print('Could not launch $url');
+                    // * Getting Ready for Release
+                    // print('Could not launch $url');
                   }
                 },
                 icon: Icons.local_parking_outlined,

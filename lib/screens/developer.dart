@@ -16,7 +16,8 @@ class DeveloperPage extends StatelessWidget {
         forceWebView: false,
       );
     } else {
-      print('Could not launch $url');
+      // * Getting Ready for Release
+      // print('Could not launch $url');
     }
   }
 

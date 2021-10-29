@@ -31,7 +31,6 @@ class WeekBarChartState extends State<WeekBarChart> {
     double sum = 0;
     for (Transaction transaction in widget._transactions) {
       _spendings[transaction.date.weekday - 1] += transaction.amount;
-      // print('D: ${transaction.date.weekday} A: ${transaction.amount}');
       sum += transaction.amount;
     }
     return sum;
