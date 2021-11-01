@@ -15,15 +15,31 @@ Download the APK from here
 
 <img src="screenshots/ss1.png" width = 250> <img src="screenshots/ss2.png" width = 250> <img src="screenshots/ss3.png" width = 250> <img src="screenshots/ss4.png" width = 250> <img src="screenshots/ss5.png" width = 250> <img src="screenshots/ss6.png" width = 250> <img src="screenshots/ss7.png" width = 250> <img src="screenshots/ss8.png" width = 250>
 
-## Getting Started
+### Track your expenses. See Weekly Bar Graph and Pie Chart. Made with Flutter.
 
-This project is a starting point for a Flutter application.
+• Private – No Tracking. All your expenses data remains on your phone. If you uninstall the app the data is automatically deleted.
 
-A few resources to get you started if this is your first Flutter project:
+• Simple – Easy to add, update, search and delete all your expenses.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+• Add Pictures – Add pictures of bills to keep track of your spendings.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+• Open Source – Expense Tracker is a completely open source app made by a single developer from scratch.
+
+<b>
+<u>Disclaimer:</u>
+This app is purely made for learning purposes. Please treat it as such.
+</b>
+
+For support, questions, or more information, please mail: contact@ankan.dev
+
+Checkout my site ([ankan.dev](https://ankan.dev)) or follow me on ([Twitter](https://twitter.com/ankan_sikdar)) and ([Instagram](https://www.instagram.com/ankan_sikdar)) for any updates.
+
+## Legal Things
+
+### Privacy Policy
+
+[Click here to read the privacy policy](https://expense-tracker-privacy.web.app/).
+
+### License
+
+Licensed under the GPLv3: http://www.gnu.org/licenses/gpl-3.0.html
