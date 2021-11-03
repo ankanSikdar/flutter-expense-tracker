@@ -8,8 +8,9 @@ You can also delete an added expenditure.
 
 # Run The App on Your Android Device Now
 
-Download the APK from here
-[Click Here To Go To The Downloads Page](https://github.com/ankanSikdar/flutter-expense-tracker/releases/ "Releases Page")
+<p align="center">
+<a href='https://play.google.com/store/apps/details?id=dev.ankan.expense_app'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height='100px'/></a>
+  </p>
 
 ## Screenshots
 
