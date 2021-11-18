@@ -12,6 +12,16 @@ You can also delete an added expenditure.
 <a href='https://play.google.com/store/apps/details?id=dev.ankan.expense_app'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height='100px'/></a>
   </p>
 
+## Details
+
+• [BLOC](https://github.com/felangel/bloc/tree/master/packages/flutter_bloc) for State Management
+
+• [FL_Chart](https://pub.dev/packages/fl_chart) for Bar and Pie Chart
+
+• [Google AdMob](https://admob.google.com/) for showing Banner Ads
+
+• [sqflite](https://pub.dev/packages/sqflite) for database operations 
+
 ## Screenshots
 
 <img src="screenshots/ss1.png" width = 250> <img src="screenshots/ss2.png" width = 250> <img src="screenshots/ss3.png" width = 250> <img src="screenshots/ss4.png" width = 250> <img src="screenshots/ss5.png" width = 250> <img src="screenshots/ss6.png" width = 250> <img src="screenshots/ss7.png" width = 250> <img src="screenshots/ss8.png" width = 250>
